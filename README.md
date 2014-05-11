@@ -1,6 +1,6 @@
 TweetsCollecter
 ===============
 UTT - Job Etudiant
-A collecter of tweets in order to analyse some Big Data issues.
+Complexe events are simple results of primary events which are usually seen but no one cares.
 
 To start, make sure you have MongoDB and Express ready.
