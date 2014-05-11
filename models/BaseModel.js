@@ -4,4 +4,5 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var UserModel = require('../models/UserModel');
+var TweetModel = require('../models/TweetModel');
+var StreamingModel = require('../models/StreamingModel');
