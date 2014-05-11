@@ -17,7 +17,7 @@ var auth_data = {
     accessTokenSecret: 'ywqj8lTkrnVAAMXs0bHGgBOeDv9fIA5daR6pXOGJnt7FU',
 };
 
-twitter.getStream('sample', {}, auth_data.accessToken, auth_data.accessTokenSecret, function(null, data, ret, res) {
+twitter.getStream('sample', {}, auth_data.accessToken, auth_data.accessTokenSecret, function(err, data, ret, res) {
     if (data && data.id && data.coordinates) {
         var t = new TweetModel({
             _id: data.id_str,
