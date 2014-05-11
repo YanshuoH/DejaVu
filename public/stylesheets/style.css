@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('./lib/fonts/glyphicons-halflings-regular.eot');
+  src: url('./lib/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('./lib/fonts/glyphicons-halflings-regular.woff') format('woff'), url('./lib/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('./lib/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+/*
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -6,3 +12,99 @@ body {
 a {
   color: #00B7FF;
 }
+*/
+/*    404, 500 center   */
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+/*  Custom styles in nav tabs bar  */
+
+button.link-btn {
+  padding: 0;
+  margin-left: 8px;
+}
+
+a.no-underline {
+  text-decoration: none;
+  color: #2a6496;
+}
+
+button.link-btn a.no-underline {
+  display: inline-block;
+  padding: 6px 12px;
+}
+
+/*******************************************/
+
+/*    Custom styles in query form    */
+
+
+button.delete-btn {
+	margin-left: 8px;
+}
+
+form fieldset.query-data {
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+form fieldset.query-data legend {
+  border-bottom: 0;
+  width: auto;
+  min-width: 0;
+  margin-left: 8px;
+}
+
+label sup.required-field {
+  color: #FF0000;
+}
+
+form textarea#description {
+  height: 183px;
+}
+
+p#confidential-message {
+  color: #FF0000;
+  font-style: italic;
+}
+
+/******************************************/
+
+/*    Custom styles in graph section    */
+
+#graph-wrapper {
+  height: 550px;
+}
+
+#graph-canvas {
+  height: 100%;
+}
+
+/***************************************/
+
+/*    Custom styles in map section    */
+
+#map-wrapper {
+  height: 550px;
+}
+
+#map-canvas {
+  height: 100%;
+}
+
+/***************************************/
+
+/*    Custom styles in admin    */
+
+.admin-action-form-edit, .admin-action-form-delete {
+  margin-left: 2px;
+  display: inline-block;
+}
+
+/*************************************/

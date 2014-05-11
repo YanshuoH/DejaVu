@@ -8,4 +8,5 @@ var routes = require('../routes/index');
 
 module.exports = function (app, config) {
     app.get('/', routes.index);
+    app.post('/run', routes.run);
 }

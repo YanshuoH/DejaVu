@@ -5,4 +5,8 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var TweetModel = require('../models/TweetModel');
-var StreamingModel = require('../models/StreamingModel');
+var getStreaming = require('../lib/getStreaming');
+
+// getStreaming.run(function() {
+    // console.log('=============End getStreaming=====================');
+// });

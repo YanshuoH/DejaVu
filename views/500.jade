@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .row
+    .span12
+      .hero-unit.center
+        h1 Something went wrong
+        small Error 500
+        br
+        pre= error
+        a.btn.btn-large.btn-info(href='/') Go Back to Home Page
+          i.icon-home.icon.white

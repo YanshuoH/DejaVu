@@ -58,7 +58,6 @@ module.exports = function(app, config) {
     app.use(express.static(config.root + '/public'));
 
     // Create a 404-500 middleware to handle the errors
-    /*
     app.use(function(err, req, res, next) {
         // if Object not found, treat as 404
         if (err.message
@@ -80,5 +79,4 @@ module.exports = function(app, config) {
             req: req
         });
     });
-    */
 }

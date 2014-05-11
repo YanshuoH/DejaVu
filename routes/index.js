@@ -3,8 +3,15 @@
  */
 var path = require('path');
 var mongoose = require('mongoose');
-/* GET home page. */
+var TweetModel = mongoose.model('TweetModel');
 
 exports.index = function(req, res) {
-    return res.render('index', {title: 'Welcome!!'});
+    return res.render('index', {
+        title: 'Welcome!!',
+        req: req
+    });
+}
+
+exports.run = function(req, res) {
+    
 }

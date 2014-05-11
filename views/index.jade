@@ -1,5 +1,42 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  row.center
+    form#query-form(action='#', method='post' role="form")
+      input(type='hidden', name='_csrf', value="#{csrf_token}")
+      .col-md-5.col-md-offset-4
+        fieldset.query-data
+          legend Query Params
+          .col-md-12
+            .input-group
+              .input-group-btn
+                select.btn.btn-default.dropdown-toggle(type="select" data-toggle="dropdown") Event
+                  span.caret
+                  .dropdown-menu
+                    option(value='') Type
+                    option @
+                    option #
+                    option RT
+              input#event.form-control(type='text' name='event_name', placeholder='Event')
+            .form-group
+            .form-group
+              label(for="start_date") From
+                sup.required-field *
+              input#start_date.form-control.input-date(type='text', name='start_date', placeholder='From', required)
+            .form-group
+              label(for="end_date") To
+                sup.required-field *
+              input#end_date.form-control.input-date(type='text', name='end_date', placeholder='To', required)
+            .col-md-12
+              .form-group
+                label(for="dt") δt (seconds)
+                  sup.required-field *
+                input#dt.form-control(type='number' name='dt', min="0", placeholder='δt - Number Only', required)
+            .col-md-12
+              .form-group
+                label(for="r") R (km)
+                  sup.required-field *
+                input#dt.form-control(type='number' name='r', min="0", placeholder='R - Number Only', required)
+            .col-md-12
+              .form-group
+                button#btnRun.btn.btn-primary(type='submit') Run

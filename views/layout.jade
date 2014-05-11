@@ -1,7 +1,13 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+  include ./layouts/head
   body
-    block content
+    #wrap
+      include ./layouts/header
+      .container
+        .main-content
+          include ./layouts/messages
+          .main-head
+            block main
+          block content
+      include ./layouts/foot
