@@ -6,7 +6,21 @@ var ObjectId = Schema.ObjectId;
 
 var TweetModel = require('../models/TweetModel');
 var getStreaming = require('../lib/getStreaming');
-
 // getStreaming.run(function() {
     // console.log('=============End getStreaming=====================');
 // });
+
+
+var kernel = require('../lib/kernel');
+var query_data = {
+    _csrf: 'IACJHXqYI4dMal9n7MdV+waLxYpQkPXdu4+J0=',
+    event_type: 'at',
+    event_name: 'x',
+    start_date: '05/12/2014',
+    end_date: '05/12/2014',
+    dt: '1',
+    r: '1'
+};
+kernel.run(query_data, function(err, results) {
+    console.log('=============DONE==============');
+});

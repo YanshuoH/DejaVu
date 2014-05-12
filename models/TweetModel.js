@@ -4,7 +4,10 @@ var ObjectId = Schema.ObjectId;
 
 var TweetModelSchema = new Schema({
     _id: {type: String},
-    content: {}
+    content: {},
+    created_at: {type: Date},
+    entities: {},
+    coordinates: {},
 });
 
 
