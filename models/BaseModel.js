@@ -11,18 +11,17 @@ var TweetModel = require('../models/TweetModel');
 // });
 
 
-// var kernel = require('../lib/kernel');
-// var query_data = {
-    // _csrf: 'IACJHXqYI4dMal9n7MdV+waLxYpQkPXdu4+J0=',
-    // event_type: 'at',
-    // event_name: 'x',
-    // start_date: '05/12/2014 13:02',
-    // end_date: '05/12/2014 13:03',
-    // dt: '1',
-    // r: '10'
-// };
-// kernel.run(query_data, function(err, results) {
-    // console.log('=============DONE==============');
-// });
+var kernel = require('../lib/kernel');
+var query_data = {
+    _csrf: 'IACJHXqYI4dMal9n7MdV+waLxYpQkPXdu4+J0=',
+    event_type: 'at',
+    event_name: 'x',
+    start_date: '05/12/2014 13:02',
+    end_date: '05/12/2014 13:03',
+    dt: '1',
+    r: '10'
+};
+kernel.run(query_data, function(err, results) {
+    console.log('=============DONE==============');
+});
 
-var test = require('../lib/mapred');

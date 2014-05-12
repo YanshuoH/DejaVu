@@ -16,6 +16,7 @@
     "async": "*",
     "node-xlsx": "*",
     "node-twitter-api": "*",
-    "mapred": "*"
+    "socket.io": "*",
+    "threads_a_gogo": "*"
   }
 }
