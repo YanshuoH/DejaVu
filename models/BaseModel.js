@@ -17,9 +17,9 @@ var query_data = {
     event_type: 'at',
     event_name: 'x',
     start_date: '05/12/2014',
-    end_date: '05/12/2014',
+    end_date: '05/13/2014',
     dt: '1',
-    r: '1'
+    r: '150'
 };
 kernel.run(query_data, function(err, results) {
     console.log('=============DONE==============');

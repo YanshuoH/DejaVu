@@ -18,8 +18,9 @@ TweetModelSchema.statics = {
     loadJson: function(id, cb) {
         this.findOne({ _id: id }).lean().exec(cb);
     },
-    list: function (cb) {
-        this.find().exec(cb);
+    list: function (options, cb) {
+        var criteria = options.criteria || {};
+        this.find(criteria).exec(cb);
     },
     listToJson: function(options, cb) {
         var criteria = options.criteria || {};
