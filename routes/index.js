@@ -13,5 +13,5 @@ exports.index = function(req, res) {
 }
 
 exports.run = function(req, res) {
-    
+    console.log(req.body);
 }

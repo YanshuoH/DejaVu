@@ -2,21 +2,23 @@ extends layout
 
 block content
   row.center
-    form#query-form(action='#', method='post' role="form")
+    form#query-form(action='/run', method='post' role="form")
       input(type='hidden', name='_csrf', value="#{csrf_token}")
       .col-md-5.col-md-offset-4
         fieldset.query-data
           legend Query Params
           .col-md-12
+            form-group
+             label(for="Event") Event
             .input-group
               .input-group-btn
-                select.btn.btn-default.dropdown-toggle(type="select" data-toggle="dropdown") Event
+                select.btn.btn-default.dropdown-toggle(type="select" name="event_type" data-toggle="dropdown") Event
                   span.caret
                   .dropdown-menu
                     option(value='') Type
-                    option @
-                    option #
-                    option RT
+                    option(value='at') @
+                    option(value='hashtag') #
+                    option(value='retweet') RT
               input#event.form-control(type='text' name='event_name', placeholder='Event')
             .form-group
             .form-group

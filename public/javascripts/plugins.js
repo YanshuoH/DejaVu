@@ -17,4 +17,5 @@ function displayStriped(event) {
     content += '<span class="sr-only">45% Complete</span>';
     content += '</div></div>';
     $('.main-head').html(content);
+    this.submit();
 }
