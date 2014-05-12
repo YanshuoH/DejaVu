@@ -48,7 +48,7 @@ module.exports = function(app, config) {
         next();
     });
 
-    app.use(express.favicon());
+    app.use(express.favicon("public/images/favicon.ico"));
     app.use(express.logger('dev'));
     app.use(express.json());
     app.use(express.urlencoded());
