@@ -16,7 +16,8 @@
     "async": "*",
     "node-xlsx": "*",
     "node-twitter-api": "*",
+    "twitter": "*",
     "socket.io": "*",
-    "threads_a_gogo": "*"
+    "tagg2": "*"
   }
 }

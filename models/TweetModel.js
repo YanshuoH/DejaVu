@@ -7,6 +7,8 @@ var TweetModelSchema = new Schema({
     content: {},
     created_at: {type: Date},
     entities: {},
+    lat: {type: Number},
+    lng: {type: Number},
     coordinates: {},
 });
 

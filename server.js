@@ -13,7 +13,16 @@ var http = require('http');
 // Connect to mongodb
 var mongoose = require('mongoose');
 var connect = function() {
-    var options = { server: {socketOptions: { KeepAlive: 1 } } };
+    var options = {
+        server: {
+            auto_reconnect: true,
+            socketOptions: {
+                KeepAlive: 1,
+                socketTimeoutMS: 3600000
+            },
+            poolSize: 100
+        }
+    };
     mongoose.connect(config.db, options)
 };
 connect();
