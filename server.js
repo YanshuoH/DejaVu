@@ -20,7 +20,7 @@ var connect = function() {
                 KeepAlive: 1,
                 socketTimeoutMS: 3600000
             },
-            poolSize: 100
+            poolSize: 15
         }
     };
     mongoose.connect(config.db, options)

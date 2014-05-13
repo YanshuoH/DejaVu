@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var TweetModel = require('../models/TweetModel');
-var getStreaming = require('../lib/getStreaming');
+// var getStreaming = require('../lib/getStreaming');
 /*
  * Execute time 
  */
@@ -18,13 +18,13 @@ var getStreaming = require('../lib/getStreaming');
 // });
 
 
-var kernel = require('../lib/kernel');
+var kernel = require('../lib/kernel_tagg');
 var query_data = {
     _csrf: 'IACJHXqYI4dMal9n7MdV+waLxYpQkPXdu4+J0=',
     event_type: 'at',
     event_name: 'x',
-    start_date: '05/13/2014 15:05',
-    end_date: '05/13/2014 15:08',
+    start_date: '05/13/2014 15:06',
+    end_date: '05/13/2014 15:07',
     dt: '1',
     r: '1000'
 };
