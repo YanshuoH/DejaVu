@@ -36,5 +36,6 @@ TweetModelSchema.statics = {
 
 
 // Built and exports Model from Schema
+exports.TweetModelSchema = TweetModelSchema;
 mongoose.model('TweetModel', TweetModelSchema);
 exports.TweetModel = mongoose.model('TweetModel');
