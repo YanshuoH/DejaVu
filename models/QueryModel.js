@@ -13,7 +13,8 @@ var QueryModelSchema = new Schema({
     location: {type: String},
     geocode : {type: String},
     radius: {type: String},
-    created_date: {type: Date, default: Date.now}
+    created_date: {type: Date, default: Date.now},
+    users: []
 });
 
 QueryModelSchema.statics = {
