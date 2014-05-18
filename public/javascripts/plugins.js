@@ -3,10 +3,10 @@ $(document).ready(function() {
     $('.input-date').datetimepicker();
 
     $('#start_date').on('change', function() {
-        console.log($(this).val());
         $('#end_date').val($(this).val());
     });
     $('#query-form').submit(displayStriped);
+
 });
 
 function displayStriped(event) {

@@ -9,7 +9,13 @@ $(function() {
                         label: item.formatted_address,
                         value: item.formatted_address,
                     }
-            }));
+                }));
+            })
+        },
+        select: function (event, ui){
+            var address = ui.item.value;
+            geocoder.geocode( {'address': address }, function(results, status) {
+                $("#geocode").val(results[0].geometry.location);
             })
         },
         // Cache the shitty result messages
@@ -19,7 +25,6 @@ $(function() {
         }
     });
 });
-
 
 var geocoder;
 
