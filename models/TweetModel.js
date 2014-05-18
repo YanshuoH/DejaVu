@@ -3,15 +3,26 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var TweetModelSchema = new Schema({
-    _id: {type: String},
-    content: {},
-    created_at: {type: Date},
-    entities: {},
-    lat: {type: Number},
-    lng: {type: Number},
-    coordinates: {},
+    event_type: {type: String},
+    event_name: {type: String},
+    start_date: {type: Date},
+    end_date: {type: Date},
+    dt: {type: Number},
+    r: {type: Number},
+    location: {type: String},
+    radius: {type: String}
 });
 
+
+// { _csrf: '5ADqo0kEnnnTE7K10gToRZjgdw2I22N+vimdM=',
+//   event_type: 'at',
+//   event_name: 'man',
+//   start_date: '05/17/2014 00:00',
+//   end_date: '05/19/2014 00:00',
+//   dt: '1000',
+//   r: '1000',
+//   location: '69 Avenue des Lombards, 10000 Troyes, France',
+//   radius: '100' }
 
 TweetModelSchema.statics = {
     load: function(id, cb) {
