@@ -3,26 +3,32 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var TweetModelSchema = new Schema({
-    event_type: {type: String},
-    event_name: {type: String},
-    start_date: {type: Date},
-    end_date: {type: Date},
-    dt: {type: Number},
-    r: {type: Number},
-    location: {type: String},
-    radius: {type: String}
+    _id: {type: Number},
+    metadata: {},
+    created_at: {},
+    id_str: {},
+    text: {},
+    source: {},
+    truncated: {},
+    in_reply_to_status_id: {},
+    in_reply_to_status_id_str: {},
+    in_reply_to_user_id: {},
+    in_reply_to_user_id_str: {},
+    in_reply_to_screen_name: {},
+    user_id: {type: Number, ref: 'user'},
+    geo: {},
+    coordinates: {},
+    place: {},
+    contributors: {},
+    retweeted_status: {},
+    retweet_count: {},
+    favorite_count: {},
+    entities: {},
+    favorited: {},
+    retweeted: {},
+    lang: {}
 });
 
-
-// { _csrf: '5ADqo0kEnnnTE7K10gToRZjgdw2I22N+vimdM=',
-//   event_type: 'at',
-//   event_name: 'man',
-//   start_date: '05/17/2014 00:00',
-//   end_date: '05/19/2014 00:00',
-//   dt: '1000',
-//   r: '1000',
-//   location: '69 Avenue des Lombards, 10000 Troyes, France',
-//   radius: '100' }
 
 TweetModelSchema.statics = {
     load: function(id, cb) {
