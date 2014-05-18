@@ -18,7 +18,6 @@ var connect = function() {
             auto_reconnect: true,
             socketOptions: {
                 KeepAlive: 1,
-                socketTimeoutMS: 3600000
             },
             poolSize: 15
         }
