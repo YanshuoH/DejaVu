@@ -18,6 +18,7 @@
     "node-twitter-api": "*",
     "twitter": "*",
     "socket.io": "*",
-    "tagg2": "*"
+    "tagg2": "*",
+    "later": "*"
   }
 }
