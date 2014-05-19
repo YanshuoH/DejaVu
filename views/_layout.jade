@@ -8,4 +8,7 @@ block content
         a(href="/") Home
       li(class=req.route.path === '/queries' ? 'active' : '')
         a(href="/queries") Quries
+      - if (req.path.split('/')[1] === 'results')
+        li(class='active')
+          a(href="req.route.path") Results
   block subContent
