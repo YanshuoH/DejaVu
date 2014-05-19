@@ -6,7 +6,10 @@ var ObjectId = Schema.ObjectId;
 
 var ResultModelSchema = new Schema({
     query_id: {type: ObjectId, ref: 'query'},
-    results: []
+    results: [],
+    // 1. In process
+    // 2. Done
+    status: {type: Number, default: 1}
     /*
     [{
         kenel_start:

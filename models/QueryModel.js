@@ -14,8 +14,9 @@ var QueryModelSchema = new Schema({
     geocode : {type: String},
     radius: {type: String},
     created_date: {type: Date, default: Date.now},
-    result_id : {type: ObjectId, ref: 'result'},
-    users: []
+    results_id : {type: ObjectId, ref: 'result'},
+    users: [],
+    display: {type: Number, default: 1}
 });
 
 QueryModelSchema.statics = {
