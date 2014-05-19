@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  // nav tabs
+  .row(style="margin-bottom: 15px;")
+    ul.nav.nav-pills
+      li(class=req.route.path === '/'  ? 'active' : '')
+        a(href="/") Home
+      li(class=req.route.path === '/queries' ? 'active' : '')
+        a(href="/queries") Quries
+  block subContent

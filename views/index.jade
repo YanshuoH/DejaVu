@@ -1,7 +1,9 @@
-extends layout
+extends _layout
 
-block content
-  row.center
+block subContent
+  #queriesList.panel.panel-default
+    .panel-heading
+  .row
     form#query-form(action='/run', method='post' role="form")
       input(type='hidden', name='_csrf', value="#{csrf_token}")
       input#geocode(type='hidden', name='geocode', value='')

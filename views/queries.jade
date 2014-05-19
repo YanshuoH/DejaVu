@@ -1,0 +1,27 @@
+extends _layout
+
+block subContent
+  #queriesList.panel.panel-default
+    .panel-heading
+      strong List of queries
+    table.table.table-condensed.table-bordered
+      thead
+        th Query ID
+        th Period
+        th Events
+        th Created Date
+        th Delete
+      tbody
+        - for query in queries
+          tr
+            td
+              a(href='/results/' + query.results_id)=query._id
+            td
+              ul
+                li= query.start_date
+                li= query.end_date
+            td= query.event_type + query.event_name
+            td= query.created_date
+            td
+              a(href='/queries/delete/' + query._id)
+                span(class="glyphicon glyphicon-trash text-danger")
