@@ -1,24 +1,26 @@
+// ResultModel.js
 // QueryModel.js
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var QueryModelSchema = new Schema({
-    event_type: {type: String},
-    event_name: {type: String},
-    start_date: {type: Date},
-    end_date: {type: Date},
-    dt: {type: Number},
-    r: {type: Number},
-    location: {type: String},
-    geocode : {type: String},
-    radius: {type: String},
-    created_date: {type: Date, default: Date.now},
-    result_id : {type: ObjectId, ref: 'result'},
-    users: []
+var ResultModelSchema = new Schema({
+    query_id: {type: ObjectId, ref: 'query'},
+    results: []
+    /*
+    [{
+        kenel_start:
+        kernel_end:
+        groups: [
+            [user1, user2], [
+                [tweet1, tweet2], [tweet3, tweet4]
+            ]
+        ]
+    }]
+    */
 });
 
-QueryModelSchema.statics = {
+ResultModelSchema.statics = {
     load: function(id, cb) {
         this.findOne({ _id: id }).exec(cb);
     },
@@ -37,13 +39,10 @@ QueryModelSchema.statics = {
         }
         query.exec(cb);
     },
-    checkExisting: function(data, cb) {
-        this.findOne(data).exec(cb);
-    }
 }
 
 
 // Built and exports Model from Schema
-exports.QueryModelSchema = QueryModelSchema;
-mongoose.model('QueryModel', QueryModelSchema);
-exports.QueryModel = mongoose.model('QueryModel');
+exports.ResultModelSchema = ResultModelSchema;
+mongoose.model('ResultModel', ResultModelSchema);
+exports.ResultModel = mongoose.model('ResultModel');

@@ -30,6 +30,13 @@ var TweetModelSchema = new Schema({
 });
 
 
+// Pre save, convert date to ISO date
+TweetModelSchema.pre('save', function(next) {
+    this.created_at = new Date(this.created_at).toISOString();
+    next();
+});
+
+
 TweetModelSchema.statics = {
     load: function(id, cb) {
         this.findOne({ _id: id }).exec(cb);
@@ -39,7 +46,11 @@ TweetModelSchema.statics = {
     },
     list: function (options, cb) {
         var criteria = options.criteria || {};
-        this.find(criteria).exec(cb);
+        var query = this.find(criteria);
+        if (options.where) {
+            query.where(options.where.field).in(options.where.value);
+        }
+        query.exec(cb);
     },
     listToJson: function(options, cb) {
         var criteria = options.criteria || {};
