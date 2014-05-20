@@ -19,6 +19,7 @@
     "twitter": "*",
     "socket.io": "*",
     "tagg2": "*",
-    "geojson-utils": "*"
+    "geojson-utils": "*",
+    "cron": "*"
   }
 }
