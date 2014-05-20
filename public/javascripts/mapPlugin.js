@@ -100,7 +100,9 @@ function markResults() {
 function displayStriped(queryObj, finished) {
     var content = '';
     if (!finished) {
-        content += '<div class="alert alert-info">Still in process until ' + new Date(queryObj.end_date) + '</div>';
+        var until = new Date(queryObj.end_date).setHours(new Date(queryObj.end_date).getHours(), new Date(queryObj.end_date).getMinutes() + 5);
+        var until = new Date(until);
+        content += '<div class="alert alert-info">Still in process until ' + until + '</div>';
         content += '<div class="progress progress-striped active">';
         content += '<div class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">';
         content += '<span class="sr-only">45% Complete</span>';
@@ -109,5 +111,5 @@ function displayStriped(queryObj, finished) {
     else {
         content += '<div class="alert alert-info"> - Finished - </div>';
     }
-    $('.main-head').html(content);
+    $('.info-box').html(content);
 }
