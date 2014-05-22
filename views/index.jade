@@ -11,19 +11,20 @@ block subContent
         fieldset.query-data
           legend Query Params
           .col-md-12
-            form-group
-             label(for="Event") Event
-            .input-group
-              .input-group-btn
-                select.btn.btn-default.dropdown-toggle(type="select" name="event_type" data-toggle="dropdown") Event
-                  span.caret
-                  .dropdown-menu
-                    option(value='') Type
-                    option(value='at') @
-                    option(value='hashtag') #
-                    option(value='retweet') RT
-              input#event.form-control(type='text' name='event_name', placeholder='Event')
             .form-group
+              label(for="Event") Events &nbsp;
+              a.glyphicon.glyphicon-plus-sign.green#add-event(href="#")
+            #adding-space
+            //.input-group
+              //.input-group-btn
+                //select.btn.btn-default.dropdown-toggle(type="select" name="event_type" data-toggle="dropdown") Event
+                  //span.caret
+                  //.dropdown-menu
+                    //option(value='') Type
+                    //option(value='at') @
+                    //option(value='hashtag') #
+                    //option(value='retweet') RT
+              //input#event.form-control(type='text' name='event_name', placeholder='Event')
             .form-group
               label(for="start_date") From
                 sup.required-field *
@@ -54,4 +55,4 @@ block subContent
                 input#dt.form-control(type='number' name='radius' placeholder='Radius of locatoin - Number only', required)
             .col-md-12
               .form-group
-                button#btnRun.btn.btn-primary(type='submit') Run
+                a#btnRun.btn.btn-primary Run

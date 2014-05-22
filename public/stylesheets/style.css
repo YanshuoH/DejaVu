@@ -108,3 +108,14 @@ p#confidential-message {
 }
 
 /*************************************/
+
+/* Glyphicons */
+
+.green {
+  color: #33CC33;
+}
+
+.red {
+  color: red;
+  padding:25px;
+}

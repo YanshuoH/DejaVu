@@ -5,18 +5,82 @@ $(document).ready(function() {
     $('#start_date').on('change', function() {
         $('#end_date').val($(this).val());
     });
-    $('#query-form').submit(displayStriped);
-
+    $('#add-event').on('click', addEventInput);
 });
 
+$(document.body).on('click', '#remove-event', function(){
+    $(this).parents('.form-group').remove();
+});
+$(document.body).on('click', '#btnRun', displayStriped);
+
+
+
 function displayStriped(event) {
+    console.log('WHYYYYYYYYYYYY');
     event.preventDefault();
-    var content = '';
-    content += '<div class="alert alert-info">In process, please wait a few minutes...</div>';
-    content += '<div class="progress progress-striped active">';
-    content += '<div class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">';
-    content += '<span class="sr-only">45% Complete</span>';
-    content += '</div></div>';
-    $('.main-head').html(content);
-    this.submit();
+    var inputs = [];
+    var inputGroups = $('.input-event').children('.input-group');
+    inputGroups.each(function() {
+        var input = ''
+        input += $(this).children('#content-operator').val();
+        input += $(this).children('#type-event').val();
+        input += $(this).children('#content-event').val();
+        inputs.push(input);
+    });
+    inputs_sort = []
+    for (var i=0; i<3; i++) {
+        for (var index=0; index<inputs.length; index++) {
+            if (i === 0 && inputs[index].substring(0,2) === "OR") {
+                inputs_sort.push(inputs[index]);
+            }
+            else if (i === 1 && inputs[index][0] === "-") {
+                inputs_sort.push(inputs[index]);
+            }
+            else if (i === 2 && inputs[index].substring(0,2) !== "OR" && inputs[index][0] !== "-") {
+                inputs_sort.unshift(inputs[index]);
+            }
+        }
+    }
+    var event_input = inputs_sort.join(' ');
+    if (event_input.substring(0,2) === "OR") {
+        event_input = event_input.substring(3);
+    }
+    var input_elem = $("<input />")
+        .attr("type", "hidden")
+        .attr("name", "events")
+        .attr("value", event_input)
+        .appendTo('#query-form');
+    $('#query-form').submit();
 }
+
+
+function addEventInput(event) {
+    event.preventDefault();
+    var content = '<div class="form-group input-event">';
+    content += '<div class="input-group">';
+    // content += '<div class="input-group-addon">';
+    content += '<select type="select" id="type-event" name="event_type" data-toggle="dropdown" class="btn btn-default dropdown-toggle">';
+    content += '<option value="">Type</option>';
+    content += '<option value="@">@</option>';
+    content += '<option value="#">#</option>';
+    //content += '<option value="retweet">RT</option>';
+    content += '</select>';
+    // content += '</div>';
+    content += operatorSelect;
+    content += '<span><a href="#" class="glyphicon glyphicon-minus-sign red" id="remove-event"></a></span>';
+    content += '<input id="content-event" type="text" name="event_name" placeholder="Event" class="form-control">';
+    content += '</div></div>';
+    // content += '<hr>'
+
+
+    $('#adding-space').after(content);
+}
+
+
+function removeEventInput(event) {
+    event.preventDefault();
+    console.log('oyeah==========');
+
+}
+
+var operatorSelect = '<select id="content-operator" type="select" name="operator" class="btn btn-default dropdown-toggle"><option value="">Operator</option><option value="">AND</option><option value="OR ">OR</option><option value="-">EXCLUE</option></select>';
