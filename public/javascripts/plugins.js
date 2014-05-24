@@ -39,9 +39,9 @@ function makeEventQuery() {
     var inputGroups = $('.input-event').children('.input-group');
     inputGroups.each(function() {
         var input = ''
-        input += $(this).children('#content-operator').val();
-        input += $(this).children('#type-event').val();
-        input += $(this).children('#content-event').val();
+        input += $(this).children().children('#content-operator').val();
+        input += $(this).children().children('#type-event').val();
+        input += $(this).children().children('#content-event').val();
         inputs.push(input);
     });
     inputs_sort = []
@@ -68,19 +68,25 @@ function makeEventQuery() {
 
 function addEventInput(event) {
     event.preventDefault();
-    var content = '<div class="form-group input-event">';
+    var content = '<div class="row">';
+    content = '<div class="form-group input-event">';
     content += '<div class="input-group">';
     // content += '<div class="input-group-addon">';
-    content += '<select type="select" id="type-event" name="event_type" data-toggle="dropdown" class="btn btn-default dropdown-toggle">';
-    content += '<option value="">Type</option>';
-    content += '<option value="@">@</option>';
-    content += '<option value="#">#</option>';
-    //content += '<option value="retweet">RT</option>';
-    content += '</select>';
-    // content += '</div>';
+    content += '<div class="col-md-3">';
     content += operatorSelect;
-    content += '<span><a href="#" class="glyphicon glyphicon-minus-sign red" id="remove-event"></a></span>';
+    content += '</div>';
+    content += '<div class="col-md-3">';
+    content += typeSelect;
+    content += '</div>';
+    // content += '</div>';
+    content += '<div class="col-md-4">';
     content += '<input id="content-event" type="text" name="event_name" placeholder="Event" class="form-control">';
+    content += '</div>';
+    content += '<div class="col-md-1">';
+    content += '<button type="button" class="btn btn-danger btn-sm" id="remove-event">Remove</button>';
+    // content += '<span><a href="#" class="glyphicon glyphicon-minus-sign red" id="remove-event"></a></span>';
+    content += '</div>';
+    content += '</div>';
     content += '</div></div>';
     // content += '<hr>'
 
@@ -96,3 +102,10 @@ function removeEventInput(event) {
 }
 
 var operatorSelect = '<select id="content-operator" type="select" name="operator" class="btn btn-default dropdown-toggle"><option value="">Operator</option><option value="">AND</option><option value="OR ">OR</option><option value="-">EXCLUE</option></select>';
+var typeSelect = '';
+    typeSelect += '<select type="select" id="type-event" name="event_type" data-toggle="dropdown" class="btn btn-default dropdown-toggle">';
+    typeSelect += '<option value="">Type</option>';
+    typeSelect += '<option value="@">@</option>';
+    typeSelect += '<option value="#">#</option>';
+    //content += '<option value="retweet">RT</option>';
+    typeSelect += '</select>';

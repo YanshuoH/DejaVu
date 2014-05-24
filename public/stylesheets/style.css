@@ -115,6 +115,10 @@ p#confidential-message {
   color: #33CC33;
 }
 
+.white {
+  color: white;
+}
+
 .red {
   color: red;
   padding:25px;
