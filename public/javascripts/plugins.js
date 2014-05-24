@@ -101,7 +101,7 @@ function removeEventInput(event) {
 
 }
 
-var operatorSelect = '<select id="content-operator" type="select" name="operator" class="btn btn-default dropdown-toggle"><option value="">Operator</option><option value="">AND</option><option value="OR ">OR</option><option value="-">EXCLUE</option></select>';
+var operatorSelect = '<select id="content-operator" type="select" name="operator" class="btn btn-default dropdown-toggle"><option value="">Operator</option><option value="">AND</option><option value="OR ">OR</option></select>';
 var typeSelect = '';
     typeSelect += '<select type="select" id="type-event" name="event_type" data-toggle="dropdown" class="btn btn-default dropdown-toggle">';
     typeSelect += '<option value="">Type</option>';

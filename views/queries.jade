@@ -20,7 +20,7 @@ block subContent
               ul
                 li= query.start_date
                 li= query.end_date
-            td= query.event_type + query.event_name
+            td= query.events
             td= query.created_date
             td
               a(href='/queries/delete/' + query._id)
