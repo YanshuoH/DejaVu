@@ -56,7 +56,7 @@ exports.run = function(req, res) {
             callback(null, results._id);
         }
     ], function(err, results_id) {
-        return res.redirect('/results/' + results_id.toString() + '/map');
+        return res.redirect('/results/' + results_id.toString() + '/graph');
     });
 }
 
@@ -102,46 +102,49 @@ exports.graphJson = function(req, res) {
         var nodes = [];
         var edges = [];
         var nodeCount = 0;
-        async.each(resultObj.results, function(result, result_callback) {
-            async.each(result.groups, function(group, group_callback) {
-                var tweets = group.tweets[0]
-                var tweet1 = group.tweets[0][0]
-                var tweet2 = group.tweets[0][1]
-                // Make nodes
-                var xy = utils.geocode2xy({lat: tweet1.lat, lng: tweet1.lng}, origin);
-                var node1 = {
-                    // "id": "n" + tweet1.id.toString(),
-                    "id": "n" + nodeCount,
-                    "content": tweet1.text, // TODO, add content in kernel
-                    "x": xy.x,
-                    "y": xy.y,
-                    "size": 1
-                    // "drawLabels": false
-                };
-                nodeCount++;
-                var xy = utils.geocode2xy({lat: tweet2.lat, lng: tweet2.lng}, origin);
-                var node2 = {
-                    "id": "n" + nodeCount,
-                    "content": tweet2.text,
-                    "x": xy.x,
-                    "y": xy.y,
-                    "size": 1
-                    // "drawLabels": false
-                };
-                var edge = {
-                    "id": "e" + node1.id,
-                    //"id" : "e" + tweet1.id.toString(),
-                    "source": node1.id,
-                    "target": node2.id
-                };
-                nodeCount++;
-                nodes.push(node1);
-                nodes.push(node2);
-                edges.push(edge);
-                group_callback();
+        if (typeof(resultObj.results) !== 'undefined') {
+            async.each(resultObj.results, function(result, result_callback) {
+                async.each(result.groups, function(group, group_callback) {
+                    var tweets = group.tweets[0]
+                    var tweet1 = group.tweets[0][0]
+                    var tweet2 = group.tweets[0][1]
+                    // Make nodes
+                    var xy = utils.geocode2xy({lat: tweet1.lat, lng: tweet1.lng}, origin);
+                    var node1 = {
+                        // "id": "n" + tweet1.id.toString(),
+                        "id": "n" + nodeCount,
+                        "content": tweet1.text, // TODO, add content in kernel
+                        "x": xy.x,
+                        "y": xy.y,
+                        "size": 1
+                        // "drawLabels": false
+                    };
+                    nodeCount++;
+                    var xy = utils.geocode2xy({lat: tweet2.lat, lng: tweet2.lng}, origin);
+                    var node2 = {
+                        "id": "n" + nodeCount,
+                        "content": tweet2.text,
+                        "x": xy.x,
+                        "y": xy.y,
+                        "size": 1
+                        // "drawLabels": false
+                    };
+                    var edge = {
+                        "id": "e" + node1.id,
+                        //"id" : "e" + tweet1.id.toString(),
+                        "source": node1.id,
+                        "target": node2.id
+                    };
+                    nodeCount++;
+                    nodes.push(node1);
+                    nodes.push(node2);
+                    edges.push(edge);
+                    group_callback();
+                });
+                result_callback();
             });
-            result_callback();
-        });
+        }
+
         var data = {
             "nodes": nodes,
             "edges": edges,
