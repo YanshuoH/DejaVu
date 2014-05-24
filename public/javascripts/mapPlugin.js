@@ -40,8 +40,10 @@ function markResults() {
         new google.maps.Point(10, 36)
     );
 
-
-    $.getJSON(window.location.pathname + '/json', function(resultObj) {
+    var path = window.location.pathname.split('/');
+    path[path.length-1] = 'json';
+    path = path.join('/');
+    $.getJSON(path, function(resultObj) {
         if (resultObj.status == 1) {
             $.getJSON('/queries/' + resultObj.query_id + '/json', function(queryObj) {
                 displayStriped(queryObj, false);

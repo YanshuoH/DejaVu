@@ -11,13 +11,30 @@ $(document).ready(function() {
 $(document.body).on('click', '#remove-event', function(){
     $(this).parents('.form-group').remove();
 });
+$(document.body).on('change', '.input-event', displayDashboard);
+$(document.body).on('click', '#remove-event', displayDashboard);
 $(document.body).on('click', '#btnRun', displayStriped);
 
 
+function displayDashboard(event) {
+    var event_input = makeEventQuery();
+    var content = '<label for="event-output">Events Query:</label><div id="add-dashboard" class="well well-sm">' + event_input + '</div>';
+    $('.event-output').html(content);
+}
 
 function displayStriped(event) {
-    console.log('WHYYYYYYYYYYYY');
     event.preventDefault();
+    var event_input = makeEventQuery();
+    var input_elem = $("<input />")
+        .attr("type", "hidden")
+        .attr("name", "events")
+        .attr("value", event_input)
+        .appendTo('#query-form');
+    $('#query-form').submit();
+}
+
+
+function makeEventQuery() {
     var inputs = [];
     var inputGroups = $('.input-event').children('.input-group');
     inputGroups.each(function() {
@@ -45,12 +62,7 @@ function displayStriped(event) {
     if (event_input.substring(0,2) === "OR") {
         event_input = event_input.substring(3);
     }
-    var input_elem = $("<input />")
-        .attr("type", "hidden")
-        .attr("name", "events")
-        .attr("value", event_input)
-        .appendTo('#query-form');
-    $('#query-form').submit();
+    return event_input;
 }
 
 

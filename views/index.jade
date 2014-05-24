@@ -4,10 +4,10 @@ block subContent
   #queriesList.panel.panel-default
     .panel-heading
   .row
-    form#query-form(action='/run', method='post' role="form")
-      input(type='hidden', name='_csrf', value="#{csrf_token}")
-      input#geocode(type='hidden', name='geocode', value='')
-      .col-md-5.col-md-offset-4
+    .col-md-6
+      form#query-form(action='/run', method='post' role="form")
+        input(type='hidden', name='_csrf', value="#{csrf_token}")
+        input#geocode(type='hidden', name='geocode', value='')
         fieldset.query-data
           legend Query Params
           .col-md-12
@@ -56,3 +56,8 @@ block subContent
             .col-md-12
               .form-group
                 a#btnRun.btn.btn-primary Run
+    .col-md-5
+      fieldset.query-data
+        legend Dashboard
+        .event-output
+

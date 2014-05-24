@@ -22,20 +22,20 @@ var Kernel = require('../lib/Kernel');
 
 // async.waterfall([
 //     function(callback) {
-//         var results = new ResultModel({query_id: '537a3dacdcbf4b70196e5f0c'});
+//         var results = new ResultModel({query_id: '537a50f35082309c1dae0c08'});
 //         results.save(function(err) {
 //             if (err) {
 //                 console.log(err);
 //             }
 //         });
-//         QueryModel.load('537a3dacdcbf4b70196e5f0c', function(err, queryObj) {
+//         QueryModel.load('537a50f35082309c1dae0c08', function(err, queryObj) {
 //             callback(null, queryObj, results);
 //         });
 //     },
 //     // Set an hour after schedule TwitterSearch
 //     function(queryObj, results, callback) {
-//         var kernel = new Kernel(queryObj, results._id);
 //         setTimeout(function() {
+//             var kernel = new Kernel(queryObj, results._id);
 //             kernel.buildSchedule(kernel);
 //             // TODO: set to an hour
 //         }, 2000);

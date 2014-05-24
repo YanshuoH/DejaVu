@@ -9,6 +9,22 @@ block content
       li(class=req.route.path === '/queries' ? 'active' : '')
         a(href="/queries") Quries
       - if (req.path.split('/')[1] === 'results')
-        li(class='active')
-          a(href="req.route.path") Results
+        - var path = req.path.split('/')
+        - var origin_path = req.path.split('/')
+        - if (path[path.length-1] === 'map')
+          - var from = req.path
+          - path[path.length-1] = 'graph'
+          - var to = path.join('/')
+          li(class=origin_path[path.length-1] === 'map' ? 'active' : '')
+            a(href=from) Results
+          li(class=origin_path[path.length-1] === 'graph' ? 'active' : '')
+            a(href=to) Graph
+        - else
+          - var from = req.path
+          - path[path.length-1] = 'map'
+          - var to = path.join('/')
+          li(class=origin_path[path.length-1] === 'map' ? 'active' : '')
+            a(href=to) Results
+          li(class=origin_path[path.length-1] === 'graph' ? 'active' : '')
+            a(href=from) Graph
   block subContent
