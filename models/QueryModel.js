@@ -5,8 +5,7 @@ var ObjectId = Schema.ObjectId;
 
 var QueryModelSchema = new Schema({
     description: {type: String},
-    event_type: {type: String},
-    event_name: {type: String},
+    events: {type: String},
     start_date: {type: Date},
     end_date: {type: Date},
     dt: {type: Number},
