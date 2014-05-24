@@ -12,6 +12,10 @@ block subContent
           legend Query Params
           .col-md-12
             .form-group
+              label(for="description") Description
+                sup.required-field *
+              input#description.form-control(type='text', name='description', placeholder='Description of Query', required)
+            .form-group
               label(for="Event") Events &nbsp;
               button.btn.btn-success.btn-sm#add-event
                 a.glyphicon.glyphicon-plus-sign.white#add-event(href="#")

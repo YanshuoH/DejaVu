@@ -22,13 +22,13 @@ var Kernel = require('../lib/Kernel');
 
 // async.waterfall([
 //     function(callback) {
-//         var results = new ResultModel({query_id: '537a50f35082309c1dae0c08'});
+//         var results = new ResultModel({query_id: '5380a28a227d57f0199b4712'});
 //         results.save(function(err) {
 //             if (err) {
 //                 console.log(err);
 //             }
 //         });
-//         QueryModel.load('537a50f35082309c1dae0c08', function(err, queryObj) {
+//         QueryModel.load('5380a28a227d57f0199b4712', function(err, queryObj) {
 //             callback(null, queryObj, results);
 //         });
 //     },

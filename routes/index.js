@@ -1,6 +1,7 @@
 /*
  * Expose routes
  */
+var utils = require('../lib/utils');
 var async = require('async');
 var mongoose = require('mongoose');
 var QueryModel = mongoose.model('QueryModel');
@@ -93,8 +94,11 @@ exports.graphJson = function(req, res) {
         if (err) {
             console.log(err);
         }
-        // Make nodes
-        // Make edges
+        // bounding of the graph
+        var origin = {
+            lat: -90,
+            lng: 0
+        };
         var nodes = [];
         var edges = [];
         var nodeCount = 0;
@@ -104,21 +108,25 @@ exports.graphJson = function(req, res) {
                 var tweet1 = group.tweets[0][0]
                 var tweet2 = group.tweets[0][1]
                 // Make nodes
+                var xy = utils.geocode2xy({lat: tweet1.lat, lng: tweet1.lng}, origin);
                 var node1 = {
                     // "id": "n" + tweet1.id.toString(),
                     "id": "n" + nodeCount,
-                    "label": '', // TODO, add content in kernel
-                    "x": tweet1.lng,
-                    "y": tweet1.lat,
-                    "size": 3
+                    "content": tweet1.text, // TODO, add content in kernel
+                    "x": xy.x,
+                    "y": xy.y,
+                    "size": 1
+                    // "drawLabels": false
                 };
                 nodeCount++;
+                var xy = utils.geocode2xy({lat: tweet2.lat, lng: tweet2.lng}, origin);
                 var node2 = {
                     "id": "n" + nodeCount,
-                    "label": '',
-                    "x": tweet2.lng,
-                    "y": tweet2.lat,
-                    "size": 3
+                    "content": tweet2.text,
+                    "x": xy.x,
+                    "y": xy.y,
+                    "size": 1
+                    // "drawLabels": false
                 };
                 var edge = {
                     "id": "e" + node1.id,
@@ -136,7 +144,9 @@ exports.graphJson = function(req, res) {
         });
         var data = {
             "nodes": nodes,
-            "edges": edges
+            "edges": edges,
+            "width": 0,
+            "height": 0
         };
         var render_data = {
             status: resultObj.status,

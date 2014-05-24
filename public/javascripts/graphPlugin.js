@@ -15,12 +15,21 @@ function loadGraphData() {
         else {
             displayStriped({}, true);
         }
+        // var settings = new sigma.classes.configurable();
         var sig = new sigma({
             graph: data.data,
             container: 'graph-canvas',
             settings: {
+                // drawLabels: false,
+                // defaultLabelSize: 1,
                 defaultNodeColor: '#ec5148'
             }
+        });
+        sig.bind('overNode', function(e) {
+            e.data.node.label = e.data.node.content;
+        });
+        sig.bind('outNode', function(e) {
+            e.data.node.label = '';
         });
     });
 }

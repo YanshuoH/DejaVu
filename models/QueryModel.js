@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var QueryModelSchema = new Schema({
+    description: {type: String},
     event_type: {type: String},
     event_name: {type: String},
     start_date: {type: Date},

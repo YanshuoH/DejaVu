@@ -6,7 +6,7 @@ block subContent
       strong List of queries
     table.table.table-condensed.table-bordered
       thead
-        th Query ID
+        th Description
         th Period
         th Events
         th Created Date
@@ -15,7 +15,7 @@ block subContent
         - for query in queries
           tr
             td
-              a(href='/results/' + query.results_id)=query._id
+              a(href='/results/' + query.results_id + '/graph')=query.description
             td
               ul
                 li= query.start_date
