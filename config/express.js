@@ -7,8 +7,9 @@ var mongoStore = require('connect-mongo')(express)
 var flash = require('connect-flash');
 var pkg = require('../package.json');
 
-module.exports = function(app, config) {
+var OmnipotentCollector = require('../lib/OmnipotentCollector');
 
+module.exports = function(app, config) {
     app.set('showStackError', true);
 
     // set views path, template engine and default layout
@@ -30,10 +31,10 @@ module.exports = function(app, config) {
     // mongo session storage
     app.use(express.session({
         secret: pkg.name,
-        store: new mongoStore({
-            url: config.db,
-            collection: 'sessions'
-        })
+        // store: new mongoStore({
+        //     url: config.db,
+        //     collection: 'sessions'
+        // })
     }));
 
     // connect flash for flash message
@@ -53,6 +54,8 @@ module.exports = function(app, config) {
     app.use(express.json());
     app.use(express.urlencoded());
 
+    // Create Streaming object as global variable
+    omnipotentCollector =  new OmnipotentCollector();
 
     app.use(app.router);
     app.use(express.static(config.root + '/public'));

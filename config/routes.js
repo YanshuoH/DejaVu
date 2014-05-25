@@ -16,4 +16,10 @@ module.exports = function (app, config) {
     app.get('/results/:resultId/json', routes.resultJson);
     app.get('/queries/delete/:queryId', routes.deleteQuery);
     app.get('/queries/:queryId/json', routes.queryJson);
+    app.get('/streaming', routes.streaming);
+
+    app.get('/streaming/run', routes.streamingRun);
+    app.get('/streaming/stop', routes.streamingStop);
+    app.get('/streaming/status', routes.streamingStatus);
+    app.get('/streaming/info', routes.streamingInfo);
 }
