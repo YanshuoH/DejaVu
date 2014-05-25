@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .row
+    h1 - Omnipotent Streaming -
+    em Use it carefully, it's big data, that's right, but too big data will smash your database.  
+    span.glyphicon.glyphicon-flash.red
+    span.glyphicon.glyphicon-flash.red
+    span.glyphicon.glyphicon-flash.red
+  .row
+    h3 Streaming status:
+    .col-md-12#streaming-status
+      input#streaming-switch(type="checkbox" name="my-checkbox" data-on="success" data-off="danger")
+      #streaming-message
+  .row
+    h3 Database Info:
+    .col-md-12#streaming-info
+

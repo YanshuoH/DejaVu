@@ -204,3 +204,49 @@ exports.deleteQuery = function(req, res) {
         }
     });
 }
+
+exports.streaming = function(req, res) {
+    // console.log(omnipotentCollector);
+    return res.render('streaming', {
+        title: 'Omnipotent Streaming',
+        req: req
+    });
+}
+
+exports.streamingRun = function(req, res) {
+    omnipotentCollector.run(omnipotentCollector);
+    return res.json({message: 'Streaming Run'});
+}
+
+exports.streamingStop = function(req, res) {
+    try {
+      omnipotentCollector.stop(omnipotentCollector);
+    } catch(e) {
+        console.log(e);
+    }
+    return res.json({message: 'Streaming Stopped'});
+}
+
+exports.streamingStatus = function(req, res) {
+    omnipotentCollector.getStatus(function(err, streamObj) {
+        if (err) console.log(err);
+        if (!streamObj) {
+            return res.json({status: 0});
+        }
+        else {
+            return res.json({status: 1});
+        }
+    });
+}
+
+exports.streamingInfo = function(req, res) {
+    omnipotentCollector.getDBInfo(function(err, user_count, tweet_count) {
+        var streamingInfo = {
+            user_count: user_count,
+            tweet_count: tweet_count,
+            user_size: (user_count * 1500) / (1024 * 1024),
+            tweet_size: (tweet_count * 3000) / (1024 * 1024)
+        };
+        return res.json({info: streamingInfo});
+    });
+}

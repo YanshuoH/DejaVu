@@ -14,7 +14,15 @@ $(document.body).on('click', '#remove-event', function(){
 $(document.body).on('change', '.input-event', displayDashboard);
 $(document.body).on('click', '#remove-event', displayDashboard);
 $(document.body).on('click', '#btnRun', displayStriped);
+$(document.body).on('click', '.switch-left, .switch-right, #streaming-status, .has-switch', streamingManager);
 
+
+if (document.querySelector('#streaming-info')) {
+    streamingInfo();
+}
+if (document.querySelector('#streaming-switch')) {
+    streamingStatus();
+}
 
 function displayDashboard(event) {
     var event_input = makeEventQuery();
@@ -97,7 +105,6 @@ function addEventInput(event) {
 
 function removeEventInput(event) {
     event.preventDefault();
-    console.log('oyeah==========');
 
 }
 
@@ -109,3 +116,45 @@ var typeSelect = '';
     typeSelect += '<option value="#">#</option>';
     //content += '<option value="retweet">RT</option>';
     typeSelect += '</select>';
+
+
+function streamingStatus() {
+    $('#streaming-switch').bootstrapSwitch();
+    $.getJSON('/streaming/status', function(data) {
+        if (data.status === 0) {
+            $('.switch-animate').attr('class', 'has-switch switch-animate switch-off');
+        }
+        else if (data.status === 1) {
+            $('.switch-animate').attr('class', 'has-switch switch-animate switch-on');
+        }
+    });
+}
+
+function streamingManager(event) {
+    event.preventDefault();
+
+    var switchStatus = $(document.querySelector('.switch-animate')).attr('class');
+    if (switchStatus.indexOf('switch-on') > -1) {
+        $.getJSON('/streaming/run', function(data) {
+            $('#streaming-message').html(data.message);
+        });
+    }
+    else if (switchStatus.indexOf('switch-off') > -1) {
+        $.getJSON('/streaming/stop', function(data) {
+            $('#streaming-message').html(data.message);
+        });
+    };
+}
+
+function streamingInfo() {
+    var content = '';
+    $.getJSON('/streaming/info', function(data) {
+        content += '<ul>';
+        content += '<li>Number of Users : ' + data.info.user_count + '</li>';
+        content += '<li>Size Storage of Users : ' + data.info.user_size + 'M</li>';
+        content += '<li>Number of Tweets : ' + data.info.tweet_count + '</li>';
+        content += '<li>Size Storage of Tweets : ' + data.info.tweet_size + 'M</li>';
+        content +='</ul>';
+        $('#streaming-info').html(content);
+    });
+}

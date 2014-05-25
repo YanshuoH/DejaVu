@@ -41,7 +41,7 @@ mongoose.connection.on('disconnected', function() {
 require(__dirname + '/models/BaseModel');
 
 // Express settings
-var app = express();
+app = express();
 require('./config/express')(app, config);
 
 // All routes here
