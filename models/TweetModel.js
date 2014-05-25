@@ -59,7 +59,7 @@ TweetModelSchema.statics = {
             query.select(options.select);
         }
         query.exec(cb);
-    },
+    }
 }
 
 
