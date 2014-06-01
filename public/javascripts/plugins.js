@@ -26,13 +26,32 @@ if (document.querySelector('#streaming-switch')) {
 
 function displayDashboard(event) {
     var event_input = makeEventQuery();
+    var event_count = event_input.length;
+    if (event_count > 5) {
+        var message = '<div class="alert alert-danger">Maximum query charactor 140.</div>';
+        $('.event-message').html(message);
+    }
+    else {
+        $('.event-message').empty();
+    }
     var content = '<label for="event-output">Events Query:</label><div id="add-dashboard" class="well well-sm">' + event_input + '</div>';
+    var event_count = '<label for="event-count">Count.</label><div id="event-count" class="well well-sm">' + event_count + '</div>';
     $('.event-output').html(content);
+    $('.event-count').html(event_count);
 }
 
 function displayStriped(event) {
     event.preventDefault();
     var event_input = makeEventQuery();
+    // event_input = event_input.split(' ');
+    // console.log(event_input);
+    // for (var index=0; index<event_input.length; index++) {
+    //     if (event_input[index] === 'RT') {
+    //         event_input[index] = 'RT OR';
+    //     }
+    // }
+    // event_input = event_input.join(' ');
+    // console.log(event_input);
     var input_elem = $("<input />")
         .attr("type", "hidden")
         .attr("name", "events")
@@ -48,12 +67,15 @@ function makeEventQuery() {
     inputGroups.each(function() {
         var input = ''
         input += $(this).children().children('#content-operator').val();
+        if ($(this).children().children('#retweet').is(':checked')) {
+            input += 'RT ';
+        }
         input += $(this).children().children('#type-event').val();
         input += $(this).children().children('#content-event').val();
         inputs.push(input);
     });
     inputs_sort = []
-    for (var i=0; i<3; i++) {
+    for (var i=0; i<4; i++) {
         for (var index=0; index<inputs.length; index++) {
             if (i === 0 && inputs[index].substring(0,2) === "OR") {
                 inputs_sort.push(inputs[index]);
@@ -80,17 +102,20 @@ function addEventInput(event) {
     content = '<div class="form-group input-event">';
     content += '<div class="input-group">';
     // content += '<div class="input-group-addon">';
-    content += '<div class="col-md-3">';
+    content += '<div class="col-md-2">';
+    content += retweetCheckbox;
+    content += '</div>';
+    content += '<div class="col-md-2">';
     content += operatorSelect;
     content += '</div>';
-    content += '<div class="col-md-3">';
+    content += '<div class="col-md-2">';
     content += typeSelect;
     content += '</div>';
     // content += '</div>';
     content += '<div class="col-md-4">';
     content += '<input id="content-event" type="text" name="event_name" placeholder="Event" class="form-control">';
     content += '</div>';
-    content += '<div class="col-md-1">';
+    content += '<div class="col-lg-1">';
     content += '<button type="button" class="btn btn-danger btn-sm" id="remove-event">Remove</button>';
     // content += '<span><a href="#" class="glyphicon glyphicon-minus-sign red" id="remove-event"></a></span>';
     content += '</div>';
@@ -107,7 +132,7 @@ function removeEventInput(event) {
     event.preventDefault();
 
 }
-
+var retweetCheckbox = '<label>RT:&nbsp;&nbsp;&nbsp;</label><input id="retweet" type="checkbox" name="rt" value="RT">';
 var operatorSelect = '<select id="content-operator" type="select" name="operator" class="btn btn-default dropdown-toggle"><option value="">Operator</option><option value="">AND</option><option value="OR ">OR</option></select>';
 var typeSelect = '';
     typeSelect += '<select type="select" id="type-event" name="event_type" data-toggle="dropdown" class="btn btn-default dropdown-toggle">';

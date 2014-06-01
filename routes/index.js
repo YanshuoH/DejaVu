@@ -18,6 +18,7 @@ exports.index = function(req, res) {
 
 exports.run = function(req, res) {
     req.body.created_date = new Date();
+    console.log(req.body);
     // TODO: check existing
     // Wait for saving tweets,
     // Then run Kernel_mapreduce

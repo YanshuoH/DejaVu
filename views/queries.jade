@@ -9,6 +9,7 @@ block subContent
         th Description
         th Period
         th Events
+        th Params
         th Created Date
         th Delete
       tbody
@@ -18,9 +19,13 @@ block subContent
               a(href='/results/' + query.results_id + '/graph')=query.description
             td
               ul
-                li= query.start_date
-                li= query.end_date
+                li= 'From: ' + query.start_date
+                li= 'To: ' + query.end_date
             td= query.events
+            td
+              ul
+                li= 'δt: ' + query.dt + 'ms'
+                li= 'R: ' + query.r + 'km'
             td= query.created_date
             td
               a(href='/queries/delete/' + query._id)

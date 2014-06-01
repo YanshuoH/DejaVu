@@ -3,67 +3,77 @@ extends _layout
 block subContent
   #queriesList.panel.panel-default
     .panel-heading
-  .row
-    .col-md-6
-      form#query-form(action='/run', method='post' role="form")
-        input(type='hidden', name='_csrf', value="#{csrf_token}")
-        input#geocode(type='hidden', name='geocode', value='')
-        fieldset.query-data
-          legend Query Params
-          .col-md-12
-            .form-group
-              label(for="description") Description
-                sup.required-field *
-              input#description.form-control(type='text', name='description', placeholder='Description of Query', required)
-            .form-group
-              label(for="Event") Events &nbsp;
-              button.btn.btn-success.btn-sm#add-event
-                a.glyphicon.glyphicon-plus-sign.white#add-event(href="#")
-              //a.glyphicon.glyphicon-plus-sign.green#add-event(href="#")
-            #adding-space
-            //.input-group
-              //.input-group-btn
-                //select.btn.btn-default.dropdown-toggle(type="select" name="event_type" data-toggle="dropdown") Event
-                  //span.caret
-                  //.dropdown-menu
-                    //option(value='') Type
-                    //option(value='at') @
-                    //option(value='hashtag') #
-                    //option(value='retweet') RT
-              //input#event.form-control(type='text' name='event_name', placeholder='Event')
-            .form-group
-              label(for="start_date") From
-                sup.required-field *
-              input#start_date.form-control.input-date(type='text', name='start_date', placeholder='From', required)
-            .form-group
-              label(for="end_date") To
-                sup.required-field *
-              input#end_date.form-control.input-date(type='text', name='end_date', placeholder='To', required)
-            .col-md-12
-              .form-group
-                label(for="dt") δt (ms)
-                  sup.required-field *
-                input#dt.form-control(type='number' name='dt', min="0", placeholder='δt - Number Only', required)
-            .col-md-12
-              .form-group
-                label(for="r") R (km)
-                  sup.required-field *
-                input#dt.form-control(type='number' name='r', min="0", placeholder='R - Number Only', required)
-            .col-md-12
-              .form-group
-                label(for="location") Locatoin
-                  sup.required-field *
-                input#address.form-control(type='text' name='location' placeholder='Location', required)
-            .col-md-12
-              .form-group
-                label(for="radius") Radius of Location (km)
-                  sup.required-field *
-                input#dt.form-control(type='number' name='radius' placeholder='Radius of locatoin - Number only', required)
-            .col-md-12
-              .form-group
-                a#btnRun.btn.btn-primary Run
-    .col-md-5
-      fieldset.query-data
-        legend Dashboard
-        .event-output
+      strong 
+    .panel-body
+      .row
+        .col-md-7
+          form#query-form(action='/run', method='post' role="form")
+            input(type='hidden', name='_csrf', value="#{csrf_token}")
+            input#geocode(type='hidden', name='geocode', value='')
+            fieldset.query-data
+              legend Live Data Collection
+              .col-md-12
+                .form-group
+                  label(for="description") Description
+                    sup.required-field *
+                  input#description.form-control(type='text', name='description', placeholder='Description of Query', required)
+                .form-group
+                  label(for="Event") Events &nbsp;
+                  button.btn.btn-success.btn-sm#add-event
+                    a.glyphicon.glyphicon-plus-sign.white#add-event(href="#")
+                  //a.glyphicon.glyphicon-plus-sign.green#add-event(href="#")
+                #adding-space
+                //.input-group
+                  //.input-group-btn
+                    //select.btn.btn-default.dropdown-toggle(type="select" name="event_type" data-toggle="dropdown") Event
+                      //span.caret
+                      //.dropdown-menu
+                        //option(value='') Type
+                        //option(value='at') @
+                        //option(value='hashtag') #
+                        //option(value='retweet') RT
+                  //input#event.form-control(type='text' name='event_name', placeholder='Event')
+                .form-group
+                  label(for="start_date") From
+                    sup.required-field *
+                  input#start_date.form-control.input-date(type='text', name='start_date', placeholder='From', required)
+                .form-group
+                  label(for="end_date") To
+                    sup.required-field *
+                  input#end_date.form-control.input-date(type='text', name='end_date', placeholder='To', required)
+                .form-group
+                  label(for="location") Locatoin
+                    sup.required-field *
+                  input#address.form-control(type='text' name='location' placeholder='Location', required)
+                .form-group
+                  label(for="radius") Radius of Location (km)
+                    sup.required-field *
+                  input#dt.form-control(type='number' name='radius' placeholder='Radius of locatoin - Number only', required)
+            fieldset.query-data
+              legend Graph Generation
+              .col-md-12
+                .form-group
+                  label(for="dt") δt (ms)
+                    sup.required-field *
+                  input#dt.form-control(type='number' name='dt', min="0", placeholder='δt - Number Only', required)
+              .col-md-12
+                .form-group
+                  label(for="r") R (km)
+                    sup.required-field *
+                  input#dt.form-control(type='number' name='r', min="0", placeholder='R - Number Only', required)
+              .col-md-12
+                .form-group
+                  a#btnRun.btn.btn-primary Run
+        .col-md-5
+          .row
+            fieldset.query-data
+              legend Dashboard
+              .event-message
+              .col-md-9
+                .event-output
+              .col-md-3
+                .event-count
+          .row
+            filedset.query-data
+              legend Load your dataset
 
