@@ -34,6 +34,20 @@ function loadGraphData() {
     });
 }
 
+if ($('#graph-export-btn')) {
+    $('#graph-export-btn').on('click', exportGraph);
+}
+
+function exportGraph(event) {
+    html2canvas($("#graph-canvas"), {
+        onrendered: function(canvas) {
+            theCanvas = canvas;
+            // document.body.appendChild(canvas);
+            var dataUrl = canvas.toDataURL();
+            window.open(dataUrl, "toDataURL() image", "height=550");
+        }
+    });
+}
 
 // function displayStriped(queryObj, finished) {
 //     var content = '';

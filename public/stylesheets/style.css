@@ -84,6 +84,7 @@ p#confidential-message {
 
 #graph-canvas {
   height: 100%;
+  border:1px solid #00F
 }
 
 /***************************************/

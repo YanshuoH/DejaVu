@@ -27,7 +27,7 @@ if (document.querySelector('#streaming-switch')) {
 function displayDashboard(event) {
     var event_input = makeEventQuery();
     var event_count = event_input.length;
-    if (event_count > 5) {
+    if (event_count > 140) {
         var message = '<div class="alert alert-danger">Maximum query charactor 140.</div>';
         $('.event-message').html(message);
     }
