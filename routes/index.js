@@ -91,6 +91,12 @@ exports.graph = function(req, res) {
 }
 
 exports.graphJson = function(req, res) {
+    if (typeof(req.query.timelineid) !== 'undefined' && req.query.timelineid !== 'undefined') {
+        var timelineId = req.query.timelineid;
+    }
+    else {
+        var timelineId = false;
+    }
     ResultModel.load(req.params.resultId.toString(), function(err, resultObj) {
         if (err) {
             console.log(err);
@@ -104,7 +110,12 @@ exports.graphJson = function(req, res) {
         var edges = [];
         var nodeCount = 0;
         if (typeof(resultObj.results) !== 'undefined') {
-            async.each(resultObj.results, function(result, result_callback) {
+            var results_length = resultObj.results.length - 1;
+            if (timelineId) {
+                results_length = timelineId;
+            }
+            for (var results_index=0; results_index<=results_length; results_index++) {
+                var result = resultObj.results[results_index];
                 async.each(result.groups, function(group, group_callback) {
                     var tweets = group.tweets[0]
                     var tweet1 = group.tweets[0][0]
@@ -142,8 +153,7 @@ exports.graphJson = function(req, res) {
                     edges.push(edge);
                     group_callback();
                 });
-                result_callback();
-            });
+            }
         }
 
         var data = {

@@ -1,11 +1,62 @@
 if (document.querySelector('#graph-canvas')) {
     loadGraphData();
+    displayTimeline();
 }
 
-function loadGraphData() {
+// Select a timeline
+$(document.body).on('click', '.timeline-button', function() {
+    var current_id = $(this).attr('id').split('-');
+    current_id = current_id[current_id.length - 1];
+
+    var buttons = $(document.querySelector('.timeline-buttons')).children();
+    for (var index=0; index<buttons.length; index++) {
+        // Release first
+        $(buttons[index]).removeClass('active');
+        var button_id = $(buttons[index]).attr('id').split('-');
+        button_id = button_id[button_id.length - 1];
+        if (button_id <= current_id) {
+            $(buttons[index]).addClass('active');
+        }
+    }
+    loadGraphData(current_id);
+});
+
+
+function displayTimeline() {
+    var path = getJsonPath(false);
+    $.getJSON(path, function(data) {
+        var content = '<div class="timeline-buttons btn-group">';
+        for (var index=0; index<data.results.length; index++) {
+            if (index > 0
+                && (new Date(data.results[index].calculat_time).getTime() - new Date(data.results[index - 1].calculat_time).getTime()) < 1000 * 60
+                && index !== data.results.length
+                && data.results[index].groups.length == 0
+                ) {
+                continue;
+            }
+            content+= '<button type="button" id="timeline-button-' + index + '" class="btn btn-default timeline-button" value="' + data.results[index].calculat_time + '">' + data.results[index].calculat_time + '</button>';
+        }
+        content += '</div><hr>';
+        $('#timeline').html(content);
+    });
+}
+
+function getJsonPath(isGraph) {
     var path = window.location.pathname.split('/');
-    path[path.length-1] = 'graphJson';
+    if (isGraph) {
+        path[path.length-1] = 'graphJson';
+    }
+    else {
+        path[path.length-1] = 'json';
+    }
     path = path.join('/');
+    return path;
+}
+
+function loadGraphData(timeline) {
+    path = getJsonPath(true);
+    path += '?timelineid=' + timeline;
+    $('#graph-canvas').empty()
     $.getJSON(path, function(data) {
         if (data.status == 1) {
             $.getJSON('/queries/' + data.query_id + '/json', function(queryObj) {
@@ -31,6 +82,7 @@ function loadGraphData() {
         sig.bind('outNode', function(e) {
             e.data.node.label = '';
         });
+        sig.refresh();
     });
 }
 
