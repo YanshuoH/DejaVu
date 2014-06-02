@@ -55,7 +55,11 @@ UserModelSchema.statics = {
     },
     list: function (options, cb) {
         var criteria = options.criteria || {};
-        this.find(criteria).exec(cb);
+        var query = this.find(criteria);
+        if (options.where) {
+            query.where(options.where.field).in(options.where.value);
+        }
+        query.exec(cb);
     },
     listToJson: function(options, cb) {
         var criteria = options.criteria || {};

@@ -69,21 +69,13 @@ exports.exportQuery = function(req, res) {
         if (err) console.log(err);
         if (queryObj) {
             var s = new Shifting(queryObj);
-            // s.export(s);
-            console.log(queryObj);
-            var options = {
-                where: {
-                    field: '_id',
-                    value: queryObj.users
-                }
-            };
-            UserModel.list(options, function(err, users) {
-                console.log(users[0]);
-            });
+            s.export(s);
         }
-        else {
-
-        }
+        queryObj.display = -1;
+        queryObj.save(function(err) {
+            if (err) console.log(err);
+            return res.redirect('/queries');
+        });
     });
 }
 
