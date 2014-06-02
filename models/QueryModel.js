@@ -16,6 +16,7 @@ var QueryModelSchema = new Schema({
     created_date: {type: Date, default: Date.now},
     results_id : {type: ObjectId, ref: 'result'},
     users: [],
+    tweets: [],
     display: {type: Number, default: 1}
 });
 
