@@ -110,6 +110,26 @@ function exportGraph(event) {
     });
 }
 
+$(document.body).on('click', '#gexf-export-btn', exportGexf);
+
+var export_strip = '<hr><div class="progress progress-striped"><div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">20% Complete</span></div></div>';
+
+function exportGexf(event) {
+    event.preventDefault();
+    var show_progress = export_strip;
+    show_progress += '<div><b>Making files...<b></div>';
+    $('#gexf-export-info').html(show_progress);
+    var path = window.location.pathname.split('/');
+    path[path.length - 1] = 'gexf'
+    path = path.join('/');
+    $.getJSON(path, function(data) {
+        if (data.status === 1) {
+            var content = '';
+            content += '<hr><a href="/tmp/graph.gexf" class="btn btn-success">GEXF READY</a>'
+        }
+        $('#gexf-export-info').html(content);
+    });
+}
 // function displayStriped(queryObj, finished) {
 //     var content = '';
 //     if (!finished) {

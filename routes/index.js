@@ -1,6 +1,7 @@
 /*
  * Expose routes
  */
+var fs = require('fs');
 var utils = require('../lib/utils');
 var async = require('async');
 var mongoose = require('mongoose');
@@ -10,7 +11,7 @@ var ResultModel = mongoose.model('ResultModel');
 var TwitterSearch = require('../lib/TwitterSearch');
 var Kernel = require('../lib/Kernel');
 var Shifting = require('../lib/Shifting');
-
+var GexfBuilder = require('../lib/GexfBuilder');
 
 exports.index = function(req, res) {
     return res.render('index', {
@@ -217,6 +218,24 @@ exports.graphJson = function(req, res) {
         };
 
         return res.json(render_data);
+    });
+}
+
+
+exports.graphExportGexf = function(req, res) {
+    var g = new GexfBuilder(req.params.resultId.toString());
+    g.build(g, function(err, doc) {
+        if (err) console.log(err);
+        var filename = './public/tmp/graph.gexf';
+        fs.writeFile(filename, doc.toString({ pretty: true }), function(err) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                console.log('Gexf saved to ' + filename);
+            }
+            return res.json({status: 1});
+        });
     });
 }
 

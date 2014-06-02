@@ -15,6 +15,7 @@ module.exports = function (app, config) {
     app.get('/results/:resultId/graph', routes.graph);
     app.get('/results/:resultId/graphJson', routes.graphJson);
     app.get('/results/:resultId/json', routes.resultJson);
+    app.get('/results/:resultId/gexf', routes.graphExportGexf);
 
     app.get('/queries/delete/:queryId', routes.deleteQuery);
     app.get('/queries/export/:queryId', routes.exportQuery);
