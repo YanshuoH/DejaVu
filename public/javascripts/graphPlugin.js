@@ -82,7 +82,16 @@ function loadGraphData(timeline) {
         sig.bind('outNode', function(e) {
             e.data.node.label = '';
         });
-        sig.refresh();
+
+        // var atlasConfig = {
+        //     gravity: 1,
+        //     adjustSizes: true,
+        //     outboundAttractionDistribution: true,
+        //     slowDown: 0,
+        //     linLogMode: true
+        // };
+        // sig.startForceAtlas2();
+        // console.log(sig.isForceAtlas2Running());
     });
 }
 

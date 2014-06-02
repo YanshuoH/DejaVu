@@ -17,10 +17,11 @@
     "node-xlsx": "*",
     "node-twitter-api": "*",
     "twitter": "*",
-    "socket.io": "*",
-    "tagg2": "*",
+    //"socket.io": "*",
+    //"tagg2": "*",
     "geojson-utils": "*",
     "cron": "*",
-    "twit": "*"
+    "twit": "*",
+    "xmlbuilder": "*"
   }
 }
