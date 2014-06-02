@@ -4,10 +4,13 @@
 var utils = require('../lib/utils');
 var async = require('async');
 var mongoose = require('mongoose');
+
 var QueryModel = mongoose.model('QueryModel');
 var ResultModel = mongoose.model('ResultModel');
 var TwitterSearch = require('../lib/TwitterSearch');
 var Kernel = require('../lib/Kernel');
+var Shifting = require('../lib/Shifting');
+
 
 exports.index = function(req, res) {
     return res.render('index', {
@@ -61,8 +64,31 @@ exports.run = function(req, res) {
     });
 }
 
+exports.exportQuery = function(req, res) {
+    QueryModel.load(req.params.queryId.toString(), function(err, queryObj) {
+        if (err) console.log(err);
+        if (queryObj) {
+            var s = new Shifting(queryObj);
+            // s.export(s);
+            console.log(queryObj);
+            var options = {
+                where: {
+                    field: '_id',
+                    value: queryObj.users
+                }
+            };
+            UserModel.list(options, function(err, users) {
+                console.log(users[0]);
+            });
+        }
+        else {
+
+        }
+    });
+}
+
 exports.queries = function(req, res) {
-    QueryModel.find({display: 1}).sort({"created_date": 1}).exec(function(err, queries) {
+    QueryModel.find({display: 1}).sort({"created_date": -1}).exec(function(err, queries) {
         if (err) {
             req.flash('errors', utils.errors(err));
             return res.redirect('/');
@@ -73,6 +99,36 @@ exports.queries = function(req, res) {
             queries: queries,
             req: req
         });
+    });
+}
+
+exports.queryJson = function(req, res) {
+    QueryModel.load(req.params.queryId.toString(), function(err, query) {
+        if (err) {
+            console.log(err);
+        }
+        return res.json(query);
+    });
+}
+
+exports.deleteQuery = function(req, res) {
+    QueryModel.load(req.params.queryId.toString(), function(err, query) {
+        if (err) {
+            console.log(err);
+        }
+        if (query) {
+            query.display = -1;
+            query.save(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+                return res.redirect('/queries');
+            });
+        }
+        else {
+            req.flash('warning', 'Ooups, Something went wrong');
+            return res.redirect('/queries');
+        }
     });
 }
 
@@ -186,36 +242,6 @@ exports.resultJson = function(req, res) {
     });
 }
 
-exports.queryJson = function(req, res) {
-    QueryModel.load(req.params.queryId.toString(), function(err, query) {
-        if (err) {
-            console.log(err);
-        }
-        return res.json(query);
-    });
-}
-
-exports.deleteQuery = function(req, res) {
-    QueryModel.load(req.params.queryId.toString(), function(err, query) {
-        if (err) {
-            console.log(err);
-        }
-        if (query) {
-            query.display = -1;
-            query.save(function(err) {
-                if (err) {
-                    console.log(err);
-                }
-                return res.redirect('/queries');
-            });
-        }
-        else {
-            req.flash('warning', 'Ooups, Something went wrong');
-            return res.redirect('/queries');
-        }
-    });
-}
-
 exports.streaming = function(req, res) {
     // console.log(omnipotentCollector);
     return res.render('streaming', {
@@ -225,6 +251,7 @@ exports.streaming = function(req, res) {
 }
 
 exports.streamingRun = function(req, res) {
+    omnipotentCollector.connect();
     omnipotentCollector.run(omnipotentCollector);
     return res.json({message: 'Streaming Run'});
 }
@@ -240,8 +267,10 @@ exports.streamingStop = function(req, res) {
 
 exports.streamingStatus = function(req, res) {
     omnipotentCollector.getStatus(function(err, streamObj) {
+        omnipotentCollector.disconnect();
         if (err) console.log(err);
         if (!streamObj) {
+            // omnipotentCollector.disconnect();
             return res.json({status: 0});
         }
         else {
