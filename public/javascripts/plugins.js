@@ -143,17 +143,17 @@ var typeSelect = '';
     typeSelect += '</select>';
 
 
-function streamingStatus() {
-    $('#streaming-switch').bootstrapSwitch();
-    $.getJSON('/streaming/status', function(data) {
-        if (data.status === 0) {
-            $('.switch-animate').attr('class', 'has-switch switch-animate switch-off');
-        }
-        else if (data.status === 1) {
-            $('.switch-animate').attr('class', 'has-switch switch-animate switch-on');
-        }
-    });
-}
+// function streamingStatus() {
+//     $('#streaming-switch').bootstrapSwitch();
+//     $.getJSON('/streaming/status', function(data) {
+//         if (data.status === 0) {
+//             $('.switch-animate').attr('class', 'has-switch switch-animate switch-off');
+//         }
+//         else if (data.status === 1) {
+//             $('.switch-animate').attr('class', 'has-switch switch-animate switch-on');
+//         }
+//     });
+// }
 
 function streamingManager(event) {
     event.preventDefault();
@@ -172,8 +172,16 @@ function streamingManager(event) {
 }
 
 function streamingInfo() {
+    $('#streaming-switch').bootstrapSwitch();
     var content = '';
     $.getJSON('/streaming/info', function(data) {
+        if (data.status === 0) {
+            $('.switch-animate').attr('class', 'has-switch switch-animate switch-off');
+        }
+        else if (data.status === 1) {
+            $('.switch-animate').attr('class', 'has-switch switch-animate switch-on');
+        }
+
         content += '<ul>';
         content += '<li>Number of Users : ' + data.info.user_count + '</li>';
         content += '<li>Size Storage of Users : ' + data.info.user_size + 'M</li>';

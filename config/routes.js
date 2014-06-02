@@ -23,6 +23,6 @@ module.exports = function (app, config) {
     app.get('/streaming', routes.streaming);
     app.get('/streaming/run', routes.streamingRun);
     app.get('/streaming/stop', routes.streamingStop);
-    app.get('/streaming/status', routes.streamingStatus);
+    // app.get('/streaming/status', routes.streamingStatus);
     app.get('/streaming/info', routes.streamingInfo);
 }

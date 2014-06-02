@@ -257,6 +257,46 @@ exports.streamingStop = function(req, res) {
     return res.json({message: 'Streaming Stopped'});
 }
 
+exports.streamingInfo = function(req, res) {
+    var msg = {};
+    async.waterfall([
+        function(callback) {
+            omnipotentCollector.connect();
+            callback();
+        },
+        function(callback) {
+            omnipotentCollector.getStatus(function(err, streamObj) {
+                if (err) console.log(err);
+                if (!streamObj) {
+                    // omnipotentCollector.disconnect();
+                    msg.status = 0;
+                }
+                else {
+                    msg.status = 1;
+                }
+                callback(null, msg);
+            });
+        },
+        function(msg, callback) {
+            omnipotentCollector.getDBInfo(omnipotentCollector, function(err, user_count, tweet_count) {
+                var streamingInfo = {
+                    user_count: user_count,
+                    tweet_count: tweet_count,
+                    user_size: (user_count * 1500) / (1024 * 1024),
+                    tweet_size: (tweet_count * 3000) / (1024 * 1024)
+                };
+                msg.info = streamingInfo;
+                callback(null, msg);
+            });
+        }
+    ], function(err, msg) {
+        setTimeout(function() {
+            omnipotentCollector.disconnect();
+        }, 30*1000)
+        return res.json(msg);
+    });
+}
+
 exports.streamingStatus = function(req, res) {
     omnipotentCollector.getStatus(function(err, streamObj) {
         omnipotentCollector.disconnect();
@@ -271,14 +311,18 @@ exports.streamingStatus = function(req, res) {
     });
 }
 
-exports.streamingInfo = function(req, res) {
-    omnipotentCollector.getDBInfo(function(err, user_count, tweet_count) {
-        var streamingInfo = {
-            user_count: user_count,
-            tweet_count: tweet_count,
-            user_size: (user_count * 1500) / (1024 * 1024),
-            tweet_size: (tweet_count * 3000) / (1024 * 1024)
-        };
-        return res.json({info: streamingInfo});
-    });
-}
+// exports.streamingInfo = function(req, res) {
+//     omnipotentCollector.connect();
+//     omnipotentCollector.getDBInfo(omnipotentCollector, function(err, user_count, tweet_count) {
+//         var streamingInfo = {
+//             user_count: user_count,
+//             tweet_count: tweet_count,
+//             user_size: (user_count * 1500) / (1024 * 1024),
+//             tweet_size: (tweet_count * 3000) / (1024 * 1024)
+//         };
+//         setTimeout(function() {
+//             omnipotentCollector.disconnect();
+//         }, 10*1000)
+//         return res.json({info: streamingInfo});
+//     });
+// }
