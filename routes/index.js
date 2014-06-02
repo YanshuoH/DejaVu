@@ -313,6 +313,7 @@ exports.streamingStatus = function(req, res) {
 
 exports.streamingExport = function(req, res) {
     omnipotentCollector.exportJson(omnipotentCollector, function(err, user_filename, tweet_filename) {
+        omnipotentCollector.disconnect();
         return res.json({status: 1});
     });
 }
