@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2014-06-02">
+    <creator>Déj@Vu</creator>
+    <description>Export Kernel Result to Gexf format</description>
+  </meta>
+  <graph mode="dynamic" defaultedgetype="directed" timeformat="date" start="2014-06-02" end="2014-06-02">
+    <nodes>
+      <node id="n0" label="472789779097346050" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-102.68" y="3762.65" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n1" label="472787672764010500" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-135.98" y="3881.95" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n2" label="472049632928088060" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-406.70" y="3793.88" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n3" label="472049505337376800" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-406.70" y="3793.88" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n4" label="471426285273481200" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-102.92" y="3762.22" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n5" label="471426627813900300" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-122.96" y="3860.98" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n6" label="471426285273481200" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-102.92" y="3762.22" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n7" label="471418049724051460" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-150.90" y="3906.91" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n8" label="471426285273481200" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-102.92" y="3762.22" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n9" label="471414915433893900" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-140.72" y="3807.93" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n10" label="471426627813900300" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-122.96" y="3860.98" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n11" label="471418049724051460" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-150.90" y="3906.91" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n12" label="471426627813900300" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-122.96" y="3860.98" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n13" label="471414915433893900" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-140.72" y="3807.93" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n14" label="471418049724051460" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-150.90" y="3906.91" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n15" label="471414915433893900" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-140.72" y="3807.93" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n16" label="471045285851201540" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-360.17" y="4059.58" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n17" label="471058209533599740" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-225.19" y="3964.35" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n18" label="471426285273481200" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-102.92" y="3762.22" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n19" label="471426627813900300" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-122.96" y="3860.98" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n20" label="471426285273481200" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-102.92" y="3762.22" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n21" label="471418049724051460" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-150.90" y="3906.91" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n22" label="471426285273481200" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-102.92" y="3762.22" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n23" label="471414915433893900" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-140.72" y="3807.93" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n24" label="471426627813900300" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-122.96" y="3860.98" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n25" label="471418049724051460" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-150.90" y="3906.91" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n26" label="471426627813900300" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-122.96" y="3860.98" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n27" label="471414915433893900" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-140.72" y="3807.93" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n28" label="471418049724051460" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-150.90" y="3906.91" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n29" label="471414915433893900" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="-140.72" y="3807.93" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n30" label="471756575649300500" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="57.38" y="3932.05" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="n31" label="471747979687129100" start="2014-06-02" end="2014-06-02">
+        <viz:color r="239" g="173" b="66" a="0.6"/>
+        <viz:position x="11.44" y="4024.45" z="0"/>
+        <viz:size value="2.0375757"/>
+        <viz:shape value="disc"/>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="en0" source="n0" target="n1" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en2" source="n2" target="n3" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en4" source="n4" target="n5" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en6" source="n6" target="n7" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en8" source="n8" target="n9" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en10" source="n10" target="n11" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en12" source="n12" target="n13" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en14" source="n14" target="n15" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en16" source="n16" target="n17" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en18" source="n18" target="n19" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en20" source="n20" target="n21" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en22" source="n22" target="n23" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en24" source="n24" target="n25" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en26" source="n26" target="n27" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en28" source="n28" target="n29" start="2014-06-02" end="2014-06-02"/>
+      <edge id="en30" source="n30" target="n31" start="2014-06-02" end="2014-06-02"/>
+    </edges>
+  </graph>
+</gexf>
