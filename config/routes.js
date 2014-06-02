@@ -25,4 +25,5 @@ module.exports = function (app, config) {
     app.get('/streaming/stop', routes.streamingStop);
     // app.get('/streaming/status', routes.streamingStatus);
     app.get('/streaming/info', routes.streamingInfo);
+    app.get('/streaming/export', routes.streamingExport);
 }

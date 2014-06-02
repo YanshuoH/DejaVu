@@ -311,6 +311,12 @@ exports.streamingStatus = function(req, res) {
     });
 }
 
+exports.streamingExport = function(req, res) {
+    omnipotentCollector.exportJson(omnipotentCollector, function(err, user_filename, tweet_filename) {
+        return res.json({status: 1});
+    });
+}
+
 // exports.streamingInfo = function(req, res) {
 //     omnipotentCollector.connect();
 //     omnipotentCollector.getDBInfo(omnipotentCollector, function(err, user_count, tweet_count) {

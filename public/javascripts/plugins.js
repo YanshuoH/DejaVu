@@ -20,9 +20,9 @@ $(document.body).on('click', '.switch-left, .switch-right, #streaming-status, .h
 if (document.querySelector('#streaming-info')) {
     streamingInfo();
 }
-if (document.querySelector('#streaming-switch')) {
-    streamingStatus();
-}
+// if (document.querySelector('#streaming-switch')) {
+//     streamingStatus();
+// }
 
 function displayDashboard(event) {
     var event_input = makeEventQuery();
@@ -191,3 +191,20 @@ function streamingInfo() {
         $('#streaming-info').html(content);
     });
 }
+
+var streaming_strip = '<div class="progress progress-striped"><div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">20% Complete</span></div></div>';
+$(document.body).on('click', '#export-streaming button', streamingExport);
+function streamingExport() {
+    var show_progress = streaming_strip;
+    show_progress += '<div><b>Making files...<b></div>';
+    $('#export-streaming').html(show_progress);
+    $.getJSON('/streaming/export', function(data) {
+        if (data.status === 1) {
+            var content = '';
+            content += '<a href="/tmp/users.json" class="btn btn-success">Users.json</a>';
+            content += '<a href="/tmp/tweets.json" class="btn btn-success">Tweets.json</a>';
+            $('#export-streaming').html(content);
+        }
+    });
+}
+
