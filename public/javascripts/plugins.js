@@ -92,7 +92,7 @@ function makeEventQuery() {
     if (event_input.substring(0,2) === "OR") {
         event_input = event_input.substring(3);
     }
-    return event_input;
+    return event_input.trim();
 }
 
 
@@ -122,7 +122,6 @@ function addEventInput(event) {
     content += '</div>';
     content += '</div></div>';
     // content += '<hr>'
-
 
     $('#adding-space').after(content);
 }

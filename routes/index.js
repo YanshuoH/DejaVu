@@ -20,8 +20,23 @@ exports.index = function(req, res) {
     });
 }
 
+function ProceedRTString(body) {
+    var events = body.events.split(' ');
+    body.is_retweet = false;
+    for (var index=0; index<events.length; index++) {
+        if (events[index] === 'RT') {
+            events[index] = 'RT OR';
+            body.is_retweet = true;
+        }
+    }
+    body.events = events.join(' ');
+    return body;
+}
+
 exports.run = function(req, res) {
     req.body.created_date = new Date();
+    // Proceed query string if RT
+    // req.body = ProceedRTString(req.body);
     console.log(req.body);
     // TODO: check existing
     // Wait for saving tweets,
