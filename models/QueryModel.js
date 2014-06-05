@@ -17,7 +17,8 @@ var QueryModelSchema = new Schema({
     results_id : {type: ObjectId, ref: 'result'},
     users: [],
     tweets: [],
-    display: {type: Number, default: 1}
+    display: {type: Number, default: 1},
+    is_retweet: {type: Boolean, default: false}
 });
 
 QueryModelSchema.statics = {
