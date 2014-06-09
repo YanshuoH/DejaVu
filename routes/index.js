@@ -9,6 +9,8 @@ var mongoose = require('mongoose');
 var QueryModel = mongoose.model('QueryModel');
 var ResultModel = mongoose.model('ResultModel');
 var TwitterSearch = require('../lib/TwitterSearch');
+var OfflineSearch = require('../lib/OfflineSearch');
+
 var Kernel = require('../lib/Kernel');
 var Shifting = require('../lib/Shifting');
 var GexfBuilder = require('../lib/GexfBuilder');
@@ -79,6 +81,61 @@ exports.run = function(req, res) {
         return res.redirect('/results/' + results_id.toString() + '/graph');
     });
 }
+
+exports.offlineForm = function(req, res) {
+    return res.render('offline', {
+        title: 'Offline Graph Generation',
+        req: req
+    });
+}
+
+exports.offline = function(req, res) {
+    req.body.created_date = new Date();
+    // Proceed query string if RT
+    // req.body = ProceedRTString(req.body);
+    console.log(req.body);
+    // TODO: check existing
+    // Wait for saving tweets,
+    // Then run Kernel_mapreduce
+    async.waterfall([
+        function(callback) {
+            var q = new QueryModel(req.body);
+            q.users = [];
+            var results = new ResultModel({query_id: q._id});
+            results.save(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            q.results_id = results._id;
+            q.save(function(err) {
+                if (err) {
+                    var err_info = utils.errors(err);
+                    req.flash('errors', err_info);
+                    return res.redirect('/');
+                }
+                else {
+                    var data = req.body;
+                    data.queryObj = q._id;
+                    // Run TwitterSearch utils, add schedule in process
+                    var ts = new OfflineSearch(data);
+                    callback(null, q, results);
+                }
+            });
+        },
+        // Set 5mins after schedule OfflineSearch
+        function(queryObj, results, callback) {
+            setTimeout(function() {
+                var kernel = new Kernel(queryObj, results._id);
+                kernel.buildSchedule(kernel);
+            }, 1000 * 60 * 5);
+            callback(null, results._id);
+        }
+    ], function(err, results_id) {
+        return res.redirect('/results/' + results_id.toString() + '/graph');
+    });
+}
+
 
 exports.exportQuery = function(req, res) {
     QueryModel.load(req.params.queryId.toString(), function(err, queryObj) {

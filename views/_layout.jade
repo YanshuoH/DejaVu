@@ -5,7 +5,9 @@ block content
   .row(style="margin-bottom: 15px;")
     ul.nav.nav-pills
       li(class=req.route.path === '/'  ? 'active' : '')
-        a(href="/") Home
+        a(href="/") Online Generation
+      li(class=req.route.path === '/offline' ? 'active' : '')
+        a(href='/offline') Offline Generation
       li(class=req.route.path === '/queries' ? 'active' : '')
         a(href="/queries") Quries
       - if (req.path.split('/')[1] === 'results')

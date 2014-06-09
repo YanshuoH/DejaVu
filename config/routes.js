@@ -4,7 +4,7 @@
 var path = require('path');
 var mongoose = require('mongoose');
 var routes = require('../routes/index');
-/* GET home page. */
+
 
 module.exports = function (app, config) {
     app.get('/', routes.index);
@@ -16,6 +16,9 @@ module.exports = function (app, config) {
     app.get('/results/:resultId/graphJson', routes.graphJson);
     app.get('/results/:resultId/json', routes.resultJson);
     app.get('/results/:resultId/gexf', routes.graphExportGexf);
+
+    app.get('/offline', routes.offlineForm);
+    app.post('/offline/run', routes.offline);
 
     app.get('/queries/delete/:queryId', routes.deleteQuery);
     app.get('/queries/export/:queryId', routes.exportQuery);
