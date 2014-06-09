@@ -40,7 +40,14 @@ exports.run = function(req, res) {
     req.body.created_date = new Date();
     // Proceed query string if RT
     // req.body = ProceedRTString(req.body);
-    console.log(req.body);
+    var errors = utils.fieldValidation(req.body);
+    if (errors.length > 0) {
+        req.flash('warning', errors);
+        return res.render('index', {
+            title: 'Welcome!!',
+            req: req
+        });
+    }
     // TODO: check existing
     // Wait for saving tweets,
     // Then run Kernel_mapreduce
@@ -95,6 +102,14 @@ exports.offline = function(req, res) {
     // Proceed query string if RT
     // req.body = ProceedRTString(req.body);
     console.log(req.body);
+    var errors = utils.fieldValidation(req.body);
+    if (errors.length > 0) {
+        req.flash('warning', errors);
+        return res.render('offline', {
+            title: 'Welcome!!',
+            req: req
+        });
+    }
     // TODO: check existing
     // Wait for saving tweets,
     // Then run Kernel_mapreduce

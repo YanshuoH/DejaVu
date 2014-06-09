@@ -3,20 +3,20 @@ extends _layout
 block subContent
   #queriesList.panel.panel-default
     .panel-heading
-      strong 
+      strong
     .panel-body
       .row
         .col-md-7
           form#query-form(action='/run', method='post' role="form")
             input(type='hidden', name='_csrf', value="#{csrf_token}")
-            input#geocode(type='hidden', name='geocode', value='')
+            input#geocode(type='hidden', name='geocode', value=req.body.geocode)
             fieldset.query-data
               legend Live Data Collection
               .col-md-12
                 .form-group
                   label(for="description") Description
                     sup.required-field *
-                  input#description.form-control(type='text', name='description', placeholder='Description of Query', required)
+                  input#description.form-control(type='text', name='description', placeholder='Description of Query', value=req.body.description, required)
                 .form-group
                   label(for="Event") Events &nbsp;
                   button.btn.btn-success.btn-sm#add-event
@@ -36,31 +36,31 @@ block subContent
                 .form-group
                   label(for="start_date") From
                     sup.required-field *
-                  input#start_date.form-control.input-date(type='text', name='start_date', placeholder='From', required)
+                  input#start_date.form-control.input-date(type='text', name='start_date', placeholder='From', value=req.body.start_date, required)
                 .form-group
                   label(for="end_date") To
                     sup.required-field *
-                  input#end_date.form-control.input-date(type='text', name='end_date', placeholder='To', required)
+                  input#end_date.form-control.input-date(type='text', name='end_date', placeholder='To', value=req.body.end_date, required)
                 .form-group
                   label(for="location") Location
                     sup.required-field *
-                  input#address.form-control(type='text' name='location' placeholder='Location', required)
+                  input#address.form-control(type='text' name='location' placeholder='Location', value=req.body.location, required)
                 .form-group
                   label(for="radius") Radius of Location (km)
                     sup.required-field *
-                  input#dt.form-control(type='number' name='radius' placeholder='Radius of location - Number only', required)
+                  input#dt.form-control(type='number' name='radius' placeholder='Radius of location - Number only', value=req.body.radius, required)
             fieldset.query-data
               legend Graph Generation
               .col-md-12
                 .form-group
                   label(for="dt") δt (ms)
                     sup.required-field *
-                  input#dt.form-control(type='number' name='dt', min="0", placeholder='δt - Number Only', required)
+                  input#dt.form-control(type='number' name='dt', min="0", placeholder='δt - Number Only', value=req.body.dt, required)
               .col-md-12
                 .form-group
                   label(for="r") R (km)
                     sup.required-field *
-                  input#dt.form-control(type='number' name='r', min="0", placeholder='R - Number Only', required)
+                  input#dt.form-control(type='number' name='r', min="0", placeholder='R - Number Only', value=req.body.r, required)
               .col-md-12
                 .form-group
                   a#btnRun.btn.btn-primary Run

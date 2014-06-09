@@ -4,9 +4,11 @@ block content
   // nav tabs
   .row(style="margin-bottom: 15px;")
     ul.nav.nav-pills
-      li(class=req.route.path === '/'  ? 'active' : '')
+      - var fragment = req.path.split('/')
+      - var route_path = fragment[1]
+      li(class=req.route.path === ('/' || '/run') ? 'active' : '')
         a(href="/") Online Generation
-      li(class=req.route.path === '/offline' ? 'active' : '')
+      li(class=route_path === 'offline' ? 'active' : '')
         a(href='/offline') Offline Generation
       li(class=req.route.path === '/queries' ? 'active' : '')
         a(href="/queries") Quries
