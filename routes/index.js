@@ -135,6 +135,9 @@ exports.offline = function(req, res) {
                     data.queryObj = q._id;
                     // Run TwitterSearch utils, add schedule in process
                     var ts = new OfflineSearch(data);
+                    setTimeout(function() {
+                        ts.buildSchedule(ts);
+                    }, 5*1000);
                     callback(null, q, results);
                 }
             });
