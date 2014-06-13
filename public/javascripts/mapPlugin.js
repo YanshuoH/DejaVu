@@ -96,8 +96,8 @@ function markResults() {
                 var linePath = new google.maps.Polyline({
                     path: lineCoordinates,
                     strokeColor: "2ECCFA",
-                    strokeOpacity: 0.7,
-                    strokeWeight: 4
+                    strokeOpacity: 0.4,
+                    strokeWeight: 2
                 });
                 linePath.setMap(map);
 
