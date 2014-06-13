@@ -122,8 +122,18 @@ function addEventInput(event) {
     content += '</div>';
     content += '</div></div>';
     // content += '<hr>'
-
-    $('#adding-space').after(content);
+    if (document.querySelector('.input-event')) {
+        var input_events = $('.input-event');
+        if (input_events.length === 1) {
+            input_events.after(content);
+        }
+        else {
+            input_events.last().after(content);
+        }
+    }
+    else {
+        $('#adding-space').after(content);
+    }
 }
 
 
@@ -132,10 +142,11 @@ function removeEventInput(event) {
 
 }
 var retweetCheckbox = '<label>RT:&nbsp;&nbsp;&nbsp;</label><input id="retweet" type="checkbox" name="rt" value="RT">';
-var operatorSelect = '<select id="content-operator" type="select" name="operator" class="btn btn-default dropdown-toggle"><option value="">Operator</option><option value="">AND</option><option value="OR ">OR</option></select>';
+var operatorSelect = '<select id="content-operator" type="select" name="operator" class="btn btn-default dropdown-toggle"><option value="">Operator</option><option value=""></option><option value="">AND</option><option value="OR ">OR</option></select>';
 var typeSelect = '';
     typeSelect += '<select type="select" id="type-event" name="event_type" data-toggle="dropdown" class="btn btn-default dropdown-toggle">';
     typeSelect += '<option value="">Type</option>';
+    typeSelect += '<option value=""></option>';
     typeSelect += '<option value="@">@</option>';
     typeSelect += '<option value="#">#</option>';
     //content += '<option value="retweet">RT</option>';
