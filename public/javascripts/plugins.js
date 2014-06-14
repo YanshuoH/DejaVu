@@ -74,7 +74,8 @@ function makeEventQuery() {
         input += $(this).children().children('#content-event').val();
         inputs.push(input);
     });
-    inputs_sort = []
+    var inputs_sort = [];
+    var inputs_and = [];
     for (var i=0; i<4; i++) {
         for (var index=0; index<inputs.length; index++) {
             if (i === 0 && inputs[index].substring(0,2) === "OR") {
@@ -85,7 +86,13 @@ function makeEventQuery() {
             }
             else if (i === 2 && inputs[index].substring(0,2) !== "OR" && inputs[index][0] !== "-") {
                 inputs_sort.unshift(inputs[index]);
+                inputs_and.push(inputs[index]);
             }
+        }
+    }
+    if (inputs_and.length > 0) {
+        for (var index=0; index<inputs_and.length; index++) {
+            inputs_sort[index] = inputs_and[index];
         }
     }
     var event_input = inputs_sort.join(' ');
@@ -142,7 +149,7 @@ function removeEventInput(event) {
 
 }
 var retweetCheckbox = '<label>RT:&nbsp;&nbsp;&nbsp;</label><input id="retweet" type="checkbox" name="rt" value="RT">';
-var operatorSelect = '<select id="content-operator" type="select" name="operator" class="btn btn-default dropdown-toggle"><option value="">Operator</option><option value=""></option><option value="">AND</option><option value="OR ">OR</option></select>';
+var operatorSelect = '<select id="content-operator" type="select" name="operator" class="btn btn-default dropdown-toggle"><option value="">Operator</option><option value=""></option><option value="">AND</option><option value="OR ">OR</option><option value="-">EXCLU</option></select>';
 var typeSelect = '';
     typeSelect += '<select type="select" id="type-event" name="event_type" data-toggle="dropdown" class="btn btn-default dropdown-toggle">';
     typeSelect += '<option value="">Type</option>';
