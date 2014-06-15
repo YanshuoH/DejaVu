@@ -285,7 +285,9 @@ exports.streamingRun = function(req, res) {
 
 exports.streamingStop = function(req, res) {
     try {
-      omnipotentCollector.stop(omnipotentCollector);
+        setTimeout(function() {
+            omnipotentCollector.stop(omnipotentCollector);
+        }, 5*1000);
     } catch(e) {
         console.log(e);
     }
@@ -296,11 +298,11 @@ exports.streamingInfo = function(req, res) {
     var msg = {};
     async.waterfall([
         function(callback) {
-            omnipotentCollector.connect();
+            omnipotentCollector.infoConnect();
             callback();
         },
         function(callback) {
-            omnipotentCollector.getStatus(function(err, streamObj) {
+            omnipotentCollector.getStatus(omnipotentCollector, function(err, streamObj) {
                 if (err) console.log(err);
                 if (!streamObj) {
                     // omnipotentCollector.disconnect();
@@ -326,45 +328,15 @@ exports.streamingInfo = function(req, res) {
         }
     ], function(err, msg) {
         setTimeout(function() {
-            omnipotentCollector.disconnect();
+            omnipotentCollector.infoDisconnect(omnipotentCollector);
         }, 30*1000)
         return res.json(msg);
     });
 }
 
-exports.streamingStatus = function(req, res) {
-    omnipotentCollector.getStatus(function(err, streamObj) {
-        omnipotentCollector.disconnect();
-        if (err) console.log(err);
-        if (!streamObj) {
-            // omnipotentCollector.disconnect();
-            return res.json({status: 0});
-        }
-        else {
-            return res.json({status: 1});
-        }
-    });
-}
-
 exports.streamingExport = function(req, res) {
     omnipotentCollector.exportJson(omnipotentCollector, function(err, user_filename, tweet_filename) {
-        omnipotentCollector.disconnect();
+        omnipotentCollector.exportDisconnect();
         return res.json({status: 1});
     });
 }
-
-// exports.streamingInfo = function(req, res) {
-//     omnipotentCollector.connect();
-//     omnipotentCollector.getDBInfo(omnipotentCollector, function(err, user_count, tweet_count) {
-//         var streamingInfo = {
-//             user_count: user_count,
-//             tweet_count: tweet_count,
-//             user_size: (user_count * 1500) / (1024 * 1024),
-//             tweet_size: (tweet_count * 3000) / (1024 * 1024)
-//         };
-//         setTimeout(function() {
-//             omnipotentCollector.disconnect();
-//         }, 10*1000)
-//         return res.json({info: streamingInfo});
-//     });
-// }

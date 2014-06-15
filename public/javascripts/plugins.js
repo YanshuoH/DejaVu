@@ -14,11 +14,17 @@ $(document.body).on('click', '#remove-event', function(){
 $(document.body).on('change', '.input-event', displayDashboard);
 $(document.body).on('click', '#remove-event', displayDashboard);
 $(document.body).on('click', '#btnRun', displayStriped);
-$(document.body).on('click', '.switch-left, .switch-right, #streaming-status, .has-switch', streamingManager);
+$(document.body).on('click', '.switch-left, .switch-right', streamingManager);
 
-
+var refreshIntervalId;
 if (document.querySelector('#streaming-info')) {
     streamingInfo();
+    refreshIntervalId = setInterval(streamingInfo, 45*1000);
+    //streamingInfo();
+} else {
+    if (refreshIntervalId) {
+        clearInterval(refreshIntervalId);
+    }
 }
 // if (document.querySelector('#streaming-switch')) {
 //     streamingStatus();
@@ -172,24 +178,53 @@ var typeSelect = '';
 //     });
 // }
 
+var lastOpt;
 function streamingManager(event) {
     event.preventDefault();
-
-    var switchStatus = $(document.querySelector('.switch-animate')).attr('class');
-    if (switchStatus.indexOf('switch-on') > -1) {
-        $.getJSON('/streaming/run', function(data) {
-            $('#streaming-message').html(data.message);
-        });
+    var opt_ok = false;
+    // console.log(lastOpt);
+    if (lastOpt) {
+        if (new Date() - lastOpt < 5*1000) {
+            opt_ok = false;
+        }
+        else {
+            opt_ok = true;
+        }
     }
-    else if (switchStatus.indexOf('switch-off') > -1) {
-        $.getJSON('/streaming/stop', function(data) {
-            $('#streaming-message').html(data.message);
-        });
-    };
+    else {
+        opt_ok = true;
+    }
+    if (opt_ok) {
+        lastOpt = new Date();
+        var switchStatus = $(document.querySelector('.switch-animate')).attr('class');
+        if (switchStatus.indexOf('switch-on') > -1) {
+            $.getJSON('/streaming/run', function(data) {
+                $('#streaming-message').html(data.message);
+            });
+        }
+        else if (switchStatus.indexOf('switch-off') > -1) {
+            $.getJSON('/streaming/stop', function(data) {
+                $('#streaming-message').html(data.message);
+            });
+        };
+    }
+    else {
+        streamingInfo();
+        var content = '<div class="alert alert-warning alert-dismissable">';
+        content += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+        content += '<strong>Warning!</strong> Please slow down your operation, the system needs time to shut down the Streaming API(5s). Thanks!';
+        content += '</div>';
+        $('#streaming-info-box').html(content);
+    }
+    // streamingInfo();
 }
 
-function streamingInfo() {
+if (document.querySelector('#streaming-switch')) {
     $('#streaming-switch').bootstrapSwitch();
+}
+function streamingInfo() {
+    // $('#streaming-switch').bootstrapSwitch();
+    // console.log('streaming info');
     var content = '';
     $.getJSON('/streaming/info', function(data) {
         if (data.status === 0) {
@@ -208,6 +243,7 @@ function streamingInfo() {
         $('#streaming-info').html(content);
     });
 }
+
 
 var streaming_strip = '<div class="progress progress-striped"><div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">20% Complete</span></div></div>';
 $(document.body).on('click', '#export-streaming button', streamingExport);
