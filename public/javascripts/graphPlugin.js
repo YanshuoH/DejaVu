@@ -53,13 +53,13 @@ function displayTimeline() {
     $.getJSON(path, function(data) {
         var content = '<div class="timeline-buttons btn-group">';
         for (var index=0; index<data.results.length; index++) {
-            if (index > 0
-                && (new Date(data.results[index].calculat_time).getTime() - new Date(data.results[index - 1].calculat_time).getTime()) < 1000 * 60
-                && index !== data.results.length
-                && data.results[index].groups.length == 0
-                ) {
-                continue;
-            }
+            // if (index > 0
+            //     && (new Date(data.results[index].calculat_time).getTime() - new Date(data.results[index - 1].calculat_time).getTime()) < 1000 * 60
+            //     && index !== data.results.length
+            //     && data.results[index].groups.length == 0
+            //     ) {
+            //     continue;
+            // }
             content+= '<button type="button" id="timeline-button-' + index + '" class="btn btn-default timeline-button" value="' + data.results[index].calculat_time + '">' + data.results[index].calculat_time + '</button>';
         }
         content += '</div><hr>';
