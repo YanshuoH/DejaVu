@@ -10,6 +10,7 @@ var QueryModelSchema = new Schema({
     end_date: {type: Date},
     dt: {type: Number},
     r: {type: Number},
+    n: {type: Number},
     location: {type: String},
     geocode : {type: String},
     radius: {type: String},

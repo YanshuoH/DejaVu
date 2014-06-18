@@ -14,10 +14,10 @@ var OfflineSearch = require('../lib/OfflineSearch');
 var TwitterSearch = require('../lib/TwitterSearch');
 var Kernel = require('../lib/Kernel');
 
-// var async = require('async');
-// var QueryModel = mongoose.model('QueryModel');
-// var ResultModel = mongoose.model('ResultModel');
-// var Kernel = require('../lib/Kernel');
+var async = require('async');
+var QueryModel = mongoose.model('QueryModel');
+var ResultModel = mongoose.model('ResultModel');
+var Kernel = require('../lib/Kernel');
 
 // var req = {
 //     body: {
@@ -30,45 +30,54 @@ var Kernel = require('../lib/Kernel');
 //       dt: '1000',
 //       r: '1000',
 //       events: '',
+//       n: '10',
 //       created_date: new Date()
 //     }
 // };
 
-// // TODO: check existing
-// // Wait for saving tweets,
-// // Then run Kernel_mapreduce
+// TODO: check existing
+// Wait for saving tweets,
+// Then run Kernel_mapreduce
 // async.waterfall([
 //     function(callback) {
-//         var q = new QueryModel(req.body);
-//         q.users = [];
-//         var results = new ResultModel({query_id: q._id});
-//         results.save(function(err) {
-//             if (err) {
-//                 console.log(err);
-//             }
+//         QueryModel.load('53a1a297baf14ba81eb147f4', function(err, queryObj) {
+//             var results = new ResultModel({query_id: queryObj._id});
+//             results.save();
+//             queryObj.results_id = results._id;
+//             queryObj.end_date = new Date('2014-6-30').toISOString()
+//             queryObj.n = 14;
+//             callback(null, queryObj, results);
 //         });
-//         q.results_id = results._id;
-//         q.save(function(err) {
-//             if (err) {
-//                 var err_info = utils.errors(err);
-//                 req.flash('errors', err_info);
-//                 return res.redirect('/');
-//             }
-//             else {
-//                 var data = req.body;
-//                 data.queryObj = q._id;
-//                 // Run TwitterSearch utils, add schedule in process
-//                 var ts = new OfflineSearch(data);
-//                 callback(null, q, results);
-//             }
-//         });
+//         // var q = new QueryModel(req.body);
+//         // q.users = [];
+//         // var results = new ResultModel({query_id: q._id});
+//         // results.save(function(err) {
+//         //     if (err) {
+//         //         console.log(err);
+//         //     }
+//         // });
+//         // q.results_id = results._id;
+//         // q.save(function(err) {
+//         //     if (err) {
+//         //         var err_info = utils.errors(err);
+//         //         req.flash('errors', err_info);
+//         //         return res.redirect('/');
+//         //     }
+//         //     else {
+//         //         var data = req.body;
+//         //         data.queryObj = q._id;
+//         //         // Run TwitterSearch utils, add schedule in process
+//         //         var ts = new OfflineSearch(data);
+//         //         callback(null, q, results);
+//         //     }
+//         // });
 //     },
 //     // Set 5mins after schedule OfflineSearch
 //     function(queryObj, results, callback) {
 //         setTimeout(function() {
 //             var kernel = new Kernel(queryObj, results._id);
 //             kernel.buildSchedule(kernel);
-//         }, 1000 * 60 * 5);
+//         }, 1000 * 3);
 //         callback(null, results._id);
 //     }
 // ], function(err, results_id) {

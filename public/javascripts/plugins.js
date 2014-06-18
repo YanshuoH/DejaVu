@@ -12,6 +12,7 @@ $(document.body).on('click', '#remove-event', function(){
     $(this).parents('.form-group').remove();
 });
 $(document.body).on('change', '.input-event', displayDashboard);
+$(document.body).on('change', '#input-frame-number', displayFramesCheck);
 $(document.body).on('click', '#remove-event', displayDashboard);
 $(document.body).on('click', '#btnRun', displayStriped);
 $(document.body).on('click', '.switch-left, .switch-right', streamingManager);
@@ -29,6 +30,44 @@ if (document.querySelector('#streaming-info')) {
 // if (document.querySelector('#streaming-switch')) {
 //     streamingStatus();
 // }
+
+function displayFramesCheck(event) {
+    var end_date;
+    var start_date;
+    var n;
+    var dt;
+    var content = '';
+    if ($('#end_date').val()) {
+        end_date = $('#end_date').val();
+    }
+    if ($('#start_date').val()) {
+        start_date = $('#start_date').val()
+    }
+    if ($('#input-frame-number').val()) {
+        n = $('#input-frame-number').val();
+    }
+    if ($('#dt').val()) {
+        dt = $('#dt').val();
+    }
+    if (start_date && end_date && n) {
+        var steptime = (new Date(end_date).getTime() - new Date(start_date).getTime())/ n;
+        content += '<h4>Frame check</h4>';
+        content += '<div class="well well-sm">';
+        content += '<ul>';
+        content += '<li> δt: ' + dt + '</li>';
+        content += '<li> Step Time: ' + steptime + '</li>';
+        content += '</ul>';
+        if (steptime <= dt) {
+            content += '<b>Number of frames too large</b>';
+        }
+        else {
+            content += '<b>Number of frames: OK</b>';
+        }
+        content += '</div>';
+        $('.check-frames').html(content);
+    }
+
+}
 
 function displayDashboard(event) {
     var event_input = makeEventQuery();
