@@ -20,6 +20,12 @@ else {
     }
 }
 
+if (document.querySelector('#refresh-results') && document.querySelector('#map-canvas')) {
+    $(document.body).on('click', '#refresh-results', function(){
+        markResults();
+    });
+}
+
 function initializeMap() {
     var mapOptions = {
         zoom: 2,
@@ -177,8 +183,8 @@ function displayQueryInfo() {
                 tweet_size: (queryObj.tweets.length * 3000) / (1024 * 1024)
             };
             content += '<div class="panel panel-default">';
-            content += '<div class="panel-heading">Query Info</div>';
-            content += '<div class="panel-body">';
+            content += '<div class="panel-heading">Query Info <button type="button" class="btn btn-default btn-sm" id="query-info-details-btn">Details</button></div>';
+            content += '<div class="panel-body" id="query-info-details-body">';
             content += '<div class="well">';
             content += '<h5>Query Details</h5>';
             content += '<ul>';
@@ -203,6 +209,7 @@ function displayQueryInfo() {
             content += '</ul>';
             content += '</div></div>';
             $('.info-box-query-stats').html(content);
+            $('#query-info-details-body').toggle();
         });
     }
 }

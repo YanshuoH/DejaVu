@@ -3,6 +3,18 @@ if (document.querySelector('#graph-canvas')) {
     displayTimeline();
 }
 
+if (document.querySelector('#refresh-results') && document.querySelector('#graph-canvas')) {
+    $(document.body).on('click', '#refresh-results', function(){
+        loadGraphData();
+        displayTimeline();
+    });
+}
+
+$(document.body).on('click', '#query-info-details-btn', function() {
+    $(document.querySelector('#query-info-details-body')).toggle();
+});
+
+
 var graphTimeInterval;
 if (document.querySelector('#graph-canvas') && document.querySelector('.info-box')) {
     displayQueryInfo();
