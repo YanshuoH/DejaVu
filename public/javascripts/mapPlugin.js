@@ -7,6 +7,19 @@ if (document.querySelector("#map-canvas")) {
     markResults();
 }
 
+var mapTimeInterval;
+if (document.querySelector('#map-canvas') && document.querySelector('.info-box')) {
+    displayQueryInfo();
+    var mapTimeInterval = setInterval(function() {
+        displayQueryInfo();
+    }, 30*1000);
+}
+else {
+    if (mapTimeInterval) {
+        clearInterval(mapTimeInterval);
+    }
+}
+
 function initializeMap() {
     var mapOptions = {
         zoom: 2,
@@ -149,4 +162,47 @@ function displayStriped(queryObj, finished) {
         content += '<div class="alert alert-info"> - Finished - </div>';
     }
     $('.info-box').html(content);
+}
+
+function displayQueryInfo() {
+    var info_box_rel = $('.info-box').attr('rel');
+    var path = '/queries/' + info_box_rel.toString() + '/json';
+    var content = '';
+    if (info_box_rel) {
+        $.getJSON(path, function(queryObj) {
+            var queryInfo = {
+                user_count: queryObj.users.length,
+                tweet_count: queryObj.tweets.length,
+                user_size: (queryObj.users.length * 1500) / (1024 * 1024),
+                tweet_size: (queryObj.tweets.length * 3000) / (1024 * 1024)
+            };
+            content += '<div class="panel panel-default">';
+            content += '<div class="panel-heading">Query Info</div>';
+            content += '<div class="panel-body">';
+            content += '<div class="well">';
+            content += '<h5>Query Details</h5>';
+            content += '<ul>';
+            content += '<li> Description: ' + queryObj.description + '</li>';
+            content += '<li> Events: ' + queryObj.events + '</li>';
+            content += '<li> Created Date: ' + queryObj.created_date + '</li>';
+            content += '<li> Start Date: ' + queryObj.start_date + '</li>';
+            content += '<li> End Date: ' + queryObj.end_date + '</li>';
+            content += '<li> Location: ' + queryObj.location + '</li>';
+            content += '<li> Geometry: ' + queryObj.geocode + '</li>';
+            content += '<li> Radius: ' + queryObj.radius + 'im</li>';
+            content += '<li> δt: ' + queryObj.dt + 'ms</li>';
+            content += '<li> r: ' + queryObj.r + 'km</li>';
+            content += '</ul>';
+            content += '</div>';
+            content += '<h5>Query Stats</h5>'
+            content += '<ul>';
+            content += '<li> Number of users: ' + queryInfo.user_count + '</li>';
+            content += '<li> Size Storage of users: ' + queryInfo.user_size + 'M</li>';
+            content += '<li> Number of tweets: ' + queryInfo.tweet_count + '</li>';
+            content += '<li> Size Storage of tweets: ' + queryInfo.tweet_size + 'M</li>';
+            content += '</ul>';
+            content += '</div></div>';
+            $('.info-box-query-stats').html(content);
+        });
+    }
 }

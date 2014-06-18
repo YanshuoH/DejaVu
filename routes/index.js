@@ -217,16 +217,36 @@ exports.deleteQuery = function(req, res) {
 }
 
 exports.result = function(req, res) {
-    return res.render('results', {
+    var render_data = {
         title: 'Results - Map',
         req: req
+    };
+    ResultModel.load(req.params.resultId.toString(), function(err, resultObj) {
+        if (err) console.log(err);
+        if (!resultObj) {
+            req.flash('warning', 'Cannot find result id');
+        }
+        else {
+            render_data.queryId = resultObj.query_id;
+        }
+        return res.render('results', render_data);
     });
 }
 
 exports.graph = function(req, res) {
-    return res.render('graph', {
+    var render_data = {
         title: 'Results - Graph',
         req: req
+    };
+    ResultModel.load(req.params.resultId.toString(), function(err, resultObj) {
+        if (err) console.log(err);
+        if (!resultObj) {
+            req.flash('warning', 'Cannot find result id');
+        }
+        else {
+            render_data.queryId = resultObj.query_id;
+        }
+        return res.render('graph', render_data);
     });
 }
 

@@ -3,8 +3,10 @@ extends _layout
 block subContent
   .row
     #graph-wrapper
-      .info-box
+      .info-box(rel=queryId)
+      .info-box-query-stats
       #graph-export
+        hr
         button.btn.btn-success#graph-export-btn(type='button') Export Image
         button.btn.btn-success#gexf-export-btn(type='button') Export Gexf
         #gexf-export-info

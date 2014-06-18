@@ -3,6 +3,20 @@ if (document.querySelector('#graph-canvas')) {
     displayTimeline();
 }
 
+var graphTimeInterval;
+if (document.querySelector('#graph-canvas') && document.querySelector('.info-box')) {
+    displayQueryInfo();
+    var graphTimeInterval = setInterval(function() {
+        displayQueryInfo();
+    }, 30*1000);
+}
+else {
+    if (graphTimeInterval) {
+        clearInterval(graphTimeInterval);
+    }
+}
+
+
 // Select a timeline
 $(document.body).on('click', '.timeline-button', function() {
     var current_id = $(this).attr('id').split('-');
