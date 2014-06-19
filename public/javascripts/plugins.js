@@ -57,7 +57,7 @@ function displayFramesCheck(event) {
         content += '<li> δt: ' + dt + '</li>';
         content += '<li> Step Time: ' + steptime + '</li>';
         content += '</ul>';
-        if (steptime <= dt) {
+        if (steptime < dt) {
             content += '<b>Number of frames too large</b>';
         }
         else {
