@@ -82,7 +82,7 @@ exports.run = function(req, res) {
             setTimeout(function() {
                 var kernel = new Kernel(queryObj, results._id);
                 kernel.buildSchedule(kernel);
-            }, 1000 * 60 * 10);
+            }, 1000 * 60 * 5);
             callback(null, results._id);
         }
     ], function(err, results_id) {
