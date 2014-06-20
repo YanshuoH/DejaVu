@@ -195,9 +195,10 @@ function displayQueryInfo() {
             content += '<li> End Date: ' + queryObj.end_date + '</li>';
             content += '<li> Location: ' + queryObj.location + '</li>';
             content += '<li> Geometry: ' + queryObj.geocode + '</li>';
-            content += '<li> Radius: ' + queryObj.radius + 'im</li>';
+            content += '<li> Radius: ' + queryObj.radius + 'km</li>';
             content += '<li> δt: ' + queryObj.dt + 'ms</li>';
             content += '<li> r: ' + queryObj.r + 'km</li>';
+            content += '<li> Number of frames: ' + queryObj.n + '</li>';
             content += '</ul>';
             content += '</div>';
             content += '<h5>Query Stats</h5>'
