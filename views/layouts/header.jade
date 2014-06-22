@@ -6,10 +6,15 @@ nav.navbar.navbar-default.navbar-top(role='navigation')
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href='/') Déj@Vu
+      a.navbar-brand(href='/')
+        b="Déj@Vu - Twitter"
     .collapse.navbar-collapse
-      ul(class=active).nav.navbar-nav
+      ul.nav.navbar-nav
         li
-          a(href="/", title="Home") Home
+          a(href="/", title="Home") Collection
         li
           a(href="/streaming", title="Streaming") Streaming
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href='/')
+            b="Déj@Vu Home"
