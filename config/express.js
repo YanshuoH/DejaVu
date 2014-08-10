@@ -7,7 +7,7 @@ var mongoStore = require('connect-mongo')(express)
 var flash = require('connect-flash');
 var pkg = require('../package.json');
 
-var OmnipotentCollector = require('../lib/OmnipotentCollector');
+// var OmnipotentCollector = require('../lib/OmnipotentCollector');
 
 module.exports = function(app, config) {
     app.set('showStackError', true);
@@ -55,7 +55,7 @@ module.exports = function(app, config) {
     app.use(express.urlencoded());
 
     // Create Streaming object as global variable
-    omnipotentCollector =  new OmnipotentCollector();
+    // omnipotentCollector =  new OmnipotentCollector();
 
     app.use(app.router);
     app.use(express.static(config.root + '/public'));
