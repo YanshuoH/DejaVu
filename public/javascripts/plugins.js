@@ -16,6 +16,7 @@ $(document.body).on('change', '#input-frame-number', displayFramesCheck);
 $(document.body).on('click', '#remove-event', displayDashboard);
 $(document.body).on('click', '#btnRun', displayStriped);
 $(document.body).on('click', '.switch-left, .switch-right', streamingManager);
+$(document.body).on('click', '#offline-file-upload', offlineFileUpload);
 
 var refreshIntervalId;
 if (document.querySelector('#streaming-info')) {
@@ -300,3 +301,48 @@ function streamingExport() {
     });
 }
 
+// handle upload
+function offlineFileUpload(event) {
+    event.preventDefault();
+    var data = new FormData();
+    var files = $('#offline-file')[0].files;
+    if (files) {
+        data.append('offline', files[0]);
+    }
+    else {
+        // TODO
+    }
+
+
+    $.ajax({
+        cache: false,
+        type: 'post',
+        dataType: 'json',
+        url: '/offline/upload',
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            console.log(data);
+            var alert_status = '';
+            if (data.status === true) {
+                alert_status = 'success';
+            }
+            else {
+                alert_status = 'danger';
+            }
+            var content = '<div class="fade in alert alert-' + alert_status +'">';
+            content += '<button class="close type="button" data-dismiss="alert">×</button>';
+            content += '<ul>';
+            for (var index=0; index<data.message.length; index++) {
+                content += '<li>' + data.message[index] + '</li>';
+            }
+            content += '</ul></div>';
+            $('#messages').html(content);
+        },
+        error: function (xhr, status, error) {
+            console.log('Error: ' + error.message);
+            $('#messages').html('Error connecting to the server.');
+        },
+    });
+}

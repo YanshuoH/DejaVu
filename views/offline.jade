@@ -18,21 +18,14 @@ block subContent
                     sup.required-field *
                   input#description.form-control(type='text', name='description', placeholder='Description of Query', value=req.body.description, required)
                 .form-group
-                  label(for="Event") Events &nbsp;
-                  button.btn.btn-success.btn-sm#add-event
-                    a.glyphicon.glyphicon-plus-sign.white#add-event(href="#")
-                  //a.glyphicon.glyphicon-plus-sign.green#add-event(href="#")
-                #adding-space
-                //.input-group
-                  //.input-group-btn
-                    //select.btn.btn-default.dropdown-toggle(type="select" name="event_type" data-toggle="dropdown") Event
-                      //span.caret
-                      //.dropdown-menu
-                        //option(value='') Type
-                        //option(value='at') @
-                        //option(value='hashtag') #
-                        //option(value='retweet') RT
-                  //input#event.form-control(type='text' name='event_name', placeholder='Event')
+                  label(for="upload") Upload File
+                    sup.required-field *
+                  .col-md-9
+                    input#offline-file.form-control(type='file', name='offline_file', placeholder='Please upload your json file')
+                  .col-md-3
+                    input#offline-file-upload.form-control.btn.btn-primary(type='button', value='upload')
+                  br
+                  br
                 .form-group
                   label(for="start_date") From
                     sup.required-field *

@@ -3,6 +3,8 @@
 - var sucess = req.flash('sucess')
 - var warning = req.flash('warning')
 
+.row#messages
+
 - if (typeof(info) != 'undefined' && info.length > 0)
   .fade.in.alert.alert-info
     button.close(type='button', data-dismiss='alert') ×

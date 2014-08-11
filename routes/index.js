@@ -155,6 +155,44 @@ exports.offline = function(req, res) {
     });
 }
 
+exports.upload = function(req, res) {
+    if (typeof(req.files) !== 'undefined' && typeof(req.files.offline) !== 'undefined') {
+        var temp_path = req.files.offline.path;
+        if (temp_path) {
+            fs.readFile(temp_path, 'utf-8', function(err, content) {
+                var parseInfo = '';
+                var render_msg = {
+                    status: false,
+                    message: []
+                }
+                var message = [];
+                try {
+                    var data = JSON.parse(content);
+                } catch (e) {
+                    message.push(e);
+                    console.log(e);
+                }
+                message = message.concat(utils.validateOfflineFile(data));
+                if (message.length > 0) {
+                    render_msg.message = message;
+                }
+                else {
+                    render_msg.status = true;
+                    render_msg.message = ['File uploaded!'];
+                }
+                // console.log(message);
+                fs.unlink(temp_path);
+                return res.json(render_msg);
+            });
+        }
+    } else {
+        return res.json({
+            status: false,
+            message: ['File is mandatory and JSON format']
+        });
+        // TODO: req flash -> concat
+    }
+}
 
 exports.exportQuery = function(req, res) {
     QueryModel.load(req.params.queryId.toString(), function(err, queryObj) {

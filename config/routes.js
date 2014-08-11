@@ -19,6 +19,7 @@ module.exports = function (app, config) {
 
     app.get('/offline', routes.offlineForm);
     app.post('/offline/run', routes.offline);
+    app.post('/offline/upload', routes.upload);
 
     app.get('/queries/delete/:queryId', routes.deleteQuery);
     app.get('/queries/export/:queryId', routes.exportQuery);
@@ -30,4 +31,5 @@ module.exports = function (app, config) {
     // app.get('/streaming/status', routes.streamingStatus);
     app.get('/streaming/info', routes.streamingInfo);
     app.get('/streaming/export', routes.streamingExport);
+
 }
