@@ -41,6 +41,8 @@ module.exports = function(app, config) {
     // should be after session
     app.use(flash());
 
+    /*
+    // Goodbye CSRF
     app.use(express.csrf());
 
     // This could be moved to view-helpers :-)
@@ -48,7 +50,7 @@ module.exports = function(app, config) {
         res.locals.csrf_token = req.csrfToken();
         next();
     });
-
+    */
     app.use(express.favicon("public/images/favicon.ico"));
     app.use(express.logger('dev'));
     app.use(express.json());
