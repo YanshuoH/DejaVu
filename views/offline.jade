@@ -34,14 +34,6 @@ block subContent
                   label(for="end_date") To
                     sup.required-field *
                   input#end_date.form-control.input-date(type='text', name='end_date', placeholder='To', value=req.body.end_date, required)
-                .form-group
-                  label(for="location") Location
-                    sup.required-field *
-                  input#address.form-control(type='text' name='location' placeholder='Location', value=req.body.location, required)
-                .form-group
-                  label(for="radius") Radius of Location (km)
-                    sup.required-field *
-                  input#radius.form-control(type='number' name='radius' placeholder='Radius of location - Number only', value=req.body.radius, required)
             fieldset.query-data
               legend Graph Generation
               .col-md-12
