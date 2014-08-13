@@ -7,9 +7,9 @@ block subContent
     .panel-body
       .row
         .col-md-7
-          form#query-form(action='/offline/run', method='post' role="form")
+          form#query-form(action='/offline/run', enctype='multipart/form-data' method='post' role="form")
             input(type='hidden', name='_csrf', value="#{csrf_token}")
-            input#geocode(type='hidden', name='geocode', value=req.body.geocode)
+            // input#geocode(type='hidden', name='geocode', value=req.body.geocode)
             fieldset.query-data
               legend Load Your Dataset
               .col-md-12

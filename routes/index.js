@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var QueryModel = mongoose.model('QueryModel');
 var ResultModel = mongoose.model('ResultModel');
 var TwitterSearch = require('../lib/TwitterSearch');
-var OfflineSearch = require('../lib/OfflineSearch');
+var OfflineParse = require('../lib/OfflineParse');
 
 var Kernel = require('../lib/Kernel');
 var Shifting = require('../lib/Shifting');
@@ -103,56 +103,114 @@ exports.offline = function(req, res) {
     // req.body = ProceedRTString(req.body);
     console.log(req.body);
     var errors = utils.fieldValidation(req.body);
-    if (errors.length > 0) {
-        req.flash('warning', errors);
-        return res.render('offline', {
-            title: 'Welcome!!',
-            req: req
-        });
-    }
-    // TODO: check existing
-    // Wait for saving tweets,
-    // Then run Kernel_mapreduce
+
+    // Offline check
+    //===========================
     async.waterfall([
         function(callback) {
-            var q = new QueryModel(req.body);
-            q.users = [];
-            var results = new ResultModel({query_id: q._id});
-            results.save(function(err) {
-                if (err) {
-                    console.log(err);
+            if (typeof(req.files) !== 'undefined' && typeof(req.files.offline_file) !== 'undefined' && req.files.offline_file.originalFilename !== '') {
+                var temp_path = req.files.offline_file.path;
+                if (temp_path) {
+                    fs.readFile(temp_path, 'utf-8', function(err, content) {
+                        var parseInfo = '';
+                        var render_msg = {
+                            status: false,
+                            message: []
+                        }
+                        var message = [];
+                        try {
+                            var data = JSON.parse(content);
+                        } catch (e) {
+                            message.push(e);
+                            console.log(e);
+                        }
+                        message = message.concat(utils.validateOfflineFile(data));
+                        if (message.length > 0) {
+                            render_msg.message = message;
+                        }
+                        else {
+                            render_msg.status = true;
+                            render_msg.message = ['File uploaded!'];
+                            req.flash('warning', ['File OK!']);
+                            callback(null, render_msg, req);
+                        };
+                        // fs.unlink(temp_path);
+                        if (render_msg.status === true) {
+                            // DO nothing
+                        }
+                        else {
+                            req.flash('warning', render_msg.message);
+                            callback(null, render_msg, req);
+                        }
+                    });
                 }
-            });
-            q.results_id = results._id;
-            q.save(function(err) {
-                if (err) {
-                    var err_info = utils.errors(err);
-                    req.flash('errors', err_info);
-                    return res.redirect('/');
+            } else {
+                req.flash('warning', ['File is mandatory and JSON format']);
+                var render_msg = {
+                    status: false,
+                    message: ['File is mandatory and JSON format']
                 }
-                else {
-                    var data = req.body;
-                    data.queryObj = q._id;
-                    // Run TwitterSearch utils, add schedule in process
-                    var ts = new OfflineSearch(data);
-                    setTimeout(function() {
-                        ts.buildSchedule(ts);
-                    }, 5*1000);
-                    callback(null, q, results);
-                }
-            });
-        },
-        // Set 5mins after schedule OfflineSearch
-        function(queryObj, results, callback) {
-            setTimeout(function() {
-                var kernel = new Kernel(queryObj, results._id);
-                kernel.buildSchedule(kernel);
-            }, 1000 * 60 * 5);
-            callback(null, results._id);
+                callback(null, render_msg, req);
+            }
         }
-    ], function(err, results_id) {
-        return res.redirect('/results/' + results_id.toString() + '/graph');
+    ], function(err, render_msg, req) {
+        console.log(render_msg);
+        if (errors.length > 0 || (render_msg.statut === false)) {
+            req.flash('warning', errors);
+            return res.render('offline', {
+                req: req,
+                title: 'Offline Graphe Generation'
+            });
+        }
+
+        async.waterfall([
+            function(callback) {
+                var q = new QueryModel(req.body);
+                q.users = [];
+                var results = new ResultModel({query_id: q._id});
+                results.save(function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+                q.results_id = results._id;
+                q.save(function(err) {
+                    if (err) {
+                        var err_info = utils.errors(err);
+                        req.flash('errors', err_info);
+                        return res.redirect('/');
+                    }
+                    else {
+                        var data = req.body;
+                        data.queryObj = q._id;
+                        // Run TwitterSearch utils, add schedule in process
+                        var temp_path = req.files.offline_file.path;
+                        fs.readFile(temp_path, 'utf-8', function(err, content) {
+                            var ts = new OfflineParse(data, content);
+                            // setTimeout(function() {
+                            //     ts.buildSchedule(ts);
+                            // }, 5*1000);
+                            fs.unlink(temp_path)
+                        });
+                        callback(null, q, results);
+                    }
+                });
+            },
+            // Set 5mins after schedule OfflineSearch
+            function(queryObj, results, callback) {
+                setTimeout(function() {
+                    var kernel = new Kernel(queryObj, results._id);
+                    kernel.buildSchedule(kernel);
+                }, 1000 * 60 * 5);
+                callback(null, results._id);
+            }
+        ], function(err, results_id) {
+            return res.redirect('/results/' + results_id.toString() + '/graph');
+        });
     });
+
+    //===========================
+
 }
 
 exports.upload = function(req, res) {
@@ -169,7 +227,6 @@ exports.upload = function(req, res) {
                 try {
                     var data = JSON.parse(content);
                 } catch (e) {
-                    message.push(e);
                     console.log(e);
                 }
                 message = message.concat(utils.validateOfflineFile(data));
@@ -179,9 +236,8 @@ exports.upload = function(req, res) {
                 else {
                     render_msg.status = true;
                     render_msg.message = ['File uploaded!'];
-                }
-                // console.log(message);
-                fs.unlink(temp_path);
+                };
+                // fs.unlink(temp_path);
                 return res.json(render_msg);
             });
         }
@@ -190,7 +246,6 @@ exports.upload = function(req, res) {
             status: false,
             message: ['File is mandatory and JSON format']
         });
-        // TODO: req flash -> concat
     }
 }
 
