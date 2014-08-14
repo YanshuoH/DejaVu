@@ -1,5 +1,5 @@
 {
-  "name": "DejaVu - Twitter",
+  "name": "DejaVu_Twitter",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
     "geojson-utils": "*",
     "cron": "*",
     "twit": "*",
-    "xmlbuilder": "*"
+    "xmlbuilder": "*",
+    "longjohn": "*"
   }
 }

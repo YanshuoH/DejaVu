@@ -6,6 +6,10 @@ var utils = require('../lib/utils');
 var async = require('async');
 var mongoose = require('mongoose');
 
+// Log plugin, do not use in production ENV
+var longjohn = require('longjohn');
+
+
 var QueryModel = mongoose.model('QueryModel');
 var ResultModel = mongoose.model('ResultModel');
 var TwitterSearch = require('../lib/TwitterSearch');
