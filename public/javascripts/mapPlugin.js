@@ -190,9 +190,9 @@ function displayQueryInfo() {
             content += '<ul>';
             content += '<li> Description: ' + queryObj.description + '</li>';
             content += '<li> Events: ' + queryObj.events + '</li>';
-            content += '<li> Created Date: ' + queryObj.created_date + '</li>';
-            content += '<li> Start Date: ' + queryObj.start_date + '</li>';
-            content += '<li> End Date: ' + queryObj.end_date + '</li>';
+            content += '<li> Created Date: ' + new Date(queryObj.created_date) + '</li>';
+            content += '<li> Start Date: ' + new Date(queryObj.start_date) + '</li>';
+            content += '<li> End Date: ' + new Date(queryObj.end_date) + '</li>';
             content += '<li> Location: ' + queryObj.location + '</li>';
             content += '<li> Geometry: ' + queryObj.geocode + '</li>';
             content += '<li> Radius: ' + queryObj.radius + 'km</li>';

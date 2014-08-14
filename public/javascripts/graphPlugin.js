@@ -14,6 +14,9 @@ $(document.body).on('click', '#query-info-details-btn', function() {
     $(document.querySelector('#query-info-details-body')).toggle();
 });
 
+$(document.body).on('click', '#display-timeline-btn', function() {
+    $(document.querySelector('#timeline')).toggle();
+});
 
 var graphTimeInterval;
 if (document.querySelector('#graph-canvas') && document.querySelector('.info-box')) {
@@ -60,10 +63,11 @@ function displayTimeline() {
             //     ) {
             //     continue;
             // }
-            content+= '<button type="button" id="timeline-button-' + index + '" class="btn btn-default timeline-button" value="' + data.results[index].calculat_time + '">' + data.results[index].calculat_time + '</button>';
+            content+= '<button type="button" id="timeline-button-' + index + '" class="btn btn-default timeline-button" value="' + new Date(data.results[index].calculat_time) + '">' + new Date(data.results[index].calculat_time) + '</button>';
         }
         content += '</div><hr>';
         $('#timeline').html(content);
+        $('#timeline').toggle();
     });
 }
 

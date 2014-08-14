@@ -5,6 +5,11 @@ block subContent
     #graph-wrapper
       .info-box(rel=queryId)
       .info-box-query-stats
+      .info-box-timeline
+        .panel.panel-default
+          .panel-heading
+            button.btn.btn-default#display-timeline-btn(type='button' value='Timeline') Timeline
+          .panel-body#timeline
       #graph-export
         hr
         button.btn.btn-success#graph-export-btn(type='button') Export Image
@@ -13,7 +18,5 @@ block subContent
         hr
       #timeline-wrapper
         button.btn.btn-default#refresh-results(type='button') Refresh Results
-        h3 Timeline
-        #timeline
-          hr
+        hr
       #graph-canvas
